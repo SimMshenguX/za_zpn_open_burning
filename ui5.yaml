@@ -1,0 +1,37 @@
+specVersion: "3.1"
+metadata:
+  name: capetown.gov.za_zpn_open_burning
+type: application
+server:
+  customMiddleware:
+    - name: fiori-tools-proxy
+      afterMiddleware: compression
+      configuration:
+        ignoreCertError: false
+        backend:
+          - path: /sap
+            url: https://eadci01.capetown.gov.za:1443
+            client: "050"
+            destination: EAD
+          - path: /resources/sap/zcase_util
+            destination: EAD
+            url: https://eadci01.capetown.gov.za:1443
+            client: "050"
+            pathPrefix: /sap/bc/ui5_ui5/sap/zcase_util
+        ui5:
+          path:
+            - /resources
+            - /test-resources
+          url: https://ui5.sap.com
+          version: 1.38.59
+    - name: fiori-tools-appreload
+      afterMiddleware: compression
+      configuration:
+        port: 35729
+        path: webapp
+        delay: 300
+    - name: fiori-tools-preview
+      afterMiddleware: fiori-tools-appreload
+      configuration:
+        component: capetown.gov.za_ZPN_OPEN_BURNING
+        ui5Theme: sap_fiori_3

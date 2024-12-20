@@ -1,0 +1,182 @@
+{
+    "_version": "1.7.0",
+    "sap.app": {
+        "id": "capetown.gov.za_ZPN_OPEN_BURNING",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "sourceTemplate": {
+            "id": "servicecatalog.connectivityComponent",
+            "version": "0.0.0",
+            "toolsId": "b6302d6a-91d2-43ab-953e-815e0eb5971f"
+        },
+        "dataSources": {
+            "ZEHM_BURNING_SRV": {
+                "uri": "/sap/opu/odata/sap/ZEHM_BURNING_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml"
+                }
+            },
+            "ZEHM_COA_SRV": {
+                "uri": "/sap/opu/odata/sap/ZEHM_COA_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/ZEHM_COA_SRV/metadata.xml"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        },
+        "supportedThemes": [
+            "sap_hcb",
+            "sap_belize"
+        ]
+    },
+    "sap.ui5": {
+        "rootView": {
+            "viewName": "capetown.gov.za_ZPN_OPEN_BURNING.view.ApplicationDetails",
+            "type": "XML"
+        },
+        "dependencies": {
+            "minUI5Version": "1.30.0",
+            "libs": {
+                "sap.ui.core": {},
+                "sap.m": {},
+                "sap.ui.layout": {},
+                "sap.ushell": {},
+                "sap.collaboration": {},
+                "sap.ui.comp": {},
+                "sap.uxap": {},
+                "sap.tnt": {},
+                "sap.f": {},
+                "sap.ui.unified": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "capetown.gov.za_ZPN_OPEN_BURNING.i18n.i18n"
+                }
+            },
+            "": {
+                "type": "sap.ui.model.odata.v2.ODataModel",
+                "settings": {
+                    "defaultOperationMode": "Server",
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Request",
+                    "useBatch": false
+                },
+                "dataSource": "ZEHM_BURNING_SRV",
+                "preload": true
+            },
+            "COAModel": {
+                "type": "sap.ui.model.odata.v2.ODataModel",
+                "settings": {
+                    "defaultOperationMode": "Server",
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Request",
+                    "useBatch": false
+                },
+                "dataSource": "ZEHM_COA_SRV",
+                "preload": true
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "capetown.gov.za_ZPN_OPEN_BURNING.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+            "routes": [
+                {
+                    "name": "TargetMain",
+                    "pattern": "RouteMain",
+                    "titleTarget": "",
+                    "greedy": false,
+                    "target": [
+                        "TargetMain"
+                    ]
+                },
+                {
+                    "name": "wizard",
+                    "pattern": "wizard",
+                    "titleTarget": "",
+                    "greedy": false,
+                    "target": [
+                        "wizard"
+                    ]
+                },
+                {
+                    "name": "declaration",
+                    "pattern": "declaration",
+                    "titleTarget": "",
+                    "greedy": false,
+                    "target": [
+                        "declaration"
+                    ]
+                }
+            ],
+            "targets": {
+                "ApplicationDetails": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "viewName": "ApplicationDetails",
+                    "viewId": "ApplicationDetails"
+                },
+                "wizard": {
+                    "viewType": "XML",
+                    "viewName": "wizard"
+                },
+                "declaration": {
+                    "viewType": "XML",
+                    "viewName": "declaration"
+                },
+                "TargetMain": {
+                    "viewType": "XML",
+                    "viewName": "Main"
+                }
+            }
+        }
+    },
+    "sap.platform.abap": {
+        "uri": "/sap/bc/ui5_ui5/sap/zeh_openburning/webapp",
+        "_version": "1.1.0"
+    }
+}

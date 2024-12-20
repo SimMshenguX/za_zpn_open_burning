@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Internal Map & Solr Search</title>
+    <meta charset="utf-8" />
+    
+        <!--script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script-->
+        
+    <script src="https://citymaps.capetown.gov.za/arcgis_js_api/library/3.17/3.17/init.js"></script>
+    <link href="https://citymaps.capetown.gov.za/arcgis_js_api/library/3.17/3.17/esri/css/esri.css" rel="stylesheet" />
+    <link href="https://citymaps.capetown.gov.za/arcgis_js_api/library/3.17/3.17/dijit/themes/claro/claro.css" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.9.2/jquery-ui.min.js"></script>
+    <link href="https://code.jquery.com/ui/1.9.2/themes/start/jquery-ui.css" rel="stylesheet" />
+    
+    <link ref="stylesheet" href="style.css">
+    
+    <!--script src="jquery/jquery-1-11-1.js"></script>
+    <script src="jquery/jquery-ui.js"></script>
+    <link href="jquery/jquery-ui.css" rel="stylesheet" /-->
+        
+    
+
+    <style>
+        html, body, #mapDiv {
+            padding: 0px;
+            margin: 0px;
+            width: 100%;
+            height: 100%;
+            font-size: smaller;
+        }
+
+        #HomeButton {
+        position: absolute;
+        top: 50px;
+        left: 20px;
+        z-index: 50;
+        }
+
+        #layerlistDiv {
+            width:300px;
+            position:absolute;
+            top:100px;
+            left: 20px;
+            z-index:1000;
+        }
+
+        .solrSearch {
+            top: 20px;
+            left: 20px;
+            position: absolute;
+            border: 2px solid red;
+            z-index: 1000;
+            width: 300px;
+            opacity: 0.75;
+            border-radius: 5px;
+        }
+        
+    /* The Modal (background) */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            padding-top: 100px;
+            /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            position: relative;
+            background-color: #fefefe;
+            margin: auto;
+            padding: 0;
+            border: 1px solid #888;
+            width: 80%;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 0.4s;
+            animation-name: animatetop;
+            animation-duration: 0.4s
+        }
+
+        /* Add Animation */
+        @-webkit-keyframes animatetop {
+            from {
+                top: -300px;
+                opacity: 0
+            }
+
+            to {
+                top: 0;
+                opacity: 1
+            }
+        }
+
+        @keyframes animatetop {
+            from {
+                top: -300px;
+                opacity: 0
+            }
+
+            to {
+                top: 0;
+                opacity: 1
+            }
+        }
+
+        /* The Close Button */
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-header {
+            padding: 2px 16px;
+            background-color: #5cb85c;
+            color: white;
+        }
+
+        .modal-body {
+            padding: 2px 16px;
+            font-size: small;
+            text-align: center;
+         
+        }
+
+        .modal-footer {
+            padding: 2px 16px;
+            background-color: #5cb85c;
+            color: white;
+        }
+        
+        
+        
+    </style>
+
+    <script>
+    $(document).ready(function () {
+            require(["esri/SpatialReference", "esri/geometry/Extent", "esri/map", "esri/layers/ArcGISTiledMapServiceLayer",
+                "esri/layers/ArcGISDynamicMapServiceLayer", 'esri/tasks/query', 'esri/tasks/QueryTask', 'esri/symbols/SimpleMarkerSymbol',
+                'esri/graphic', 'esri/tasks/IdentifyTask', 'esri/tasks/IdentifyParameters', "esri/dijit/LayerList",  'esri/symbols/SimpleFillSymbol',
+                 'esri/symbols/SimpleLineSymbol', "esri/Color",    "esri/dijit/HomeButton"],
+                function (SpatialReference, Extent, Map, ArcGISTiledMapServiceLayer,
+                    ArcGISDynamicMapServiceLayer, Query, QueryTask, SimpleMarkerSymbol,
+                    Graphic, IdentifyTask, IdentifyParameters, LayerList, SimpleFillSymbol,SimpleLineSymbol, Color, HomeButton) {
+
+                     // Gloabl Declaration:
+                     var colorCyan = new Color([0,255,255]);
+                    var colorRed = new Color([255,0,0])
+                    var colorBlue = new Color([0,0,255])
+                    var slsCyan = new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, colorCyan, 2);
+                    var smsSolr = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE, 15, slsCyan,colorBlue);
+                    var smsFault = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE, 18, slsCyan,colorRed);
+                    var sls = new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, colorCyan, 2);
+                    var sfs = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, sls, new Color([0, 255, 255, 0.3]));
+                                          
+                    //Create map layers
+                    // seaLayer = new ArcGISDynamicMapServiceLayer('https://citymaps.capetown.gov.za/agsext1/rest/services/Background_Maps/Sea/MapServer', {
+                    //     id: "Sea"                            
+                    // });
+
+                    // heritageLayer = new ArcGISDynamicMapServiceLayer('https://citymaps.capetown.gov.za/agsext1/rest/services/Theme_Based/EGISViewer_Combined/MapServer', {
+                    //     id: "Heritage"                            
+                    // });
+
+                    lowBaseDataLayer = new ArcGISDynamicMapServiceLayer('https://citymaps.capetown.gov.za/agsext1/rest/services/Background_Maps/Base_Data_Low_Detail/MapServer', {
+                        id: "Low Detail" 
+                    });                              
+
+                    highBaseDataLayer = new ArcGISDynamicMapServiceLayer('https://citymaps.capetown.gov.za/agsext1/rest/services/Background_Maps/Base_Data_High_Detail/MapServer', {
+                        id: "Land Admin"
+                    });
+
+                    aerialLayer = new ArcGISDynamicMapServiceLayer('https://cityimg.capetown.gov.za/erdas-iws/esri/GeoSpatial%20Datasets/rest/services/Aerial%20Imagery_Aerial%20Imagery%202016Jan/MapServer', {
+                        id: "Aerial",
+                        visible: true
+                    });
+
+                    //Create a SpatialReference.
+                    var sr = new SpatialReference({
+                       // wkt: 'PROJCS["WGS_1984_Transverse_Mercator",GEOGCS["GCS_WGS_1984",DATUM["D_Hartebeesthoek_1994",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Transverse_Mercator"],PARAMETER["False_Easting",0.0],PARAMETER["False_Northing",0.0],PARAMETER["Central_Meridian",19.0],PARAMETER["Scale_Factor",1.0],PARAMETER["Latitude_Of_Origin",0.0],UNIT["Meter",1.0]]'
+                       wkid: 3857
+                    });
+
+                    //Create an Extent.
+                   // var extent = new Extent(-70681.94903056473, -3793530.48006096, -1051.9431038862058, -3736769.833206333, sr);
+                    var extent = new Extent(2017650.244594149, -4071834.094541768, 2139976.8892474384, -3958854.668582916, sr);
+
+                    //Create a new map.
+                    map = new Map("mapDiv", {
+                        extent: extent,
+                        logo: false,
+                        slider: false,
+                        showLabels: true
+                    });
+
+                    //Add layers to the map, take note of the order.
+                   // map.addLayers([seaLayer, aerialLayer, highBaseDataLayer, lowBaseDataLayer])
+                    map.addLayers([aerialLayer, highBaseDataLayer, lowBaseDataLayer])
+
+                    var home = new HomeButton({
+                        map: map
+                    }, "HomeButton");
+                    home.startup();         
+
+                    //Property details dialog display
+                    // Get the modal
+                    var modal = document.getElementById("myModal");
+
+                    // Get the button that opens the modal
+                    var btn = document.getElementById("myBtn");
+
+                    // Get the <span> element that closes the modal
+                    var span = document.getElementsByClassName("close")[0];
+
+                    // When the user clicks the button, open the modal 
+                    /* btn.onclick = function () {
+                         modal.style.display = "block";
+                     }*/
+
+                    // When the user clicks on <span> (x), close the modal
+                    span.onclick = function () {
+                        modal.style.display = "none";
+                    }
+
+                    // When the user clicks anywhere outside of the modal, close it
+                    window.onclick = function (event) {
+                        if (event.target == modal) {
+                            modal.style.display = "none";
+                        }
+                    }
+
+
+                    //End Property details dialog display
+                    /*Comment
+                        When the user clicks on the map, the event fire an ESRI Identify task which
+                        queries the LandAdmin layer but speficically the Heritage sublayers.
+                    */
+                    map.on("click", function (evt) {
+                        map.graphics.clear();
+                        var mapPoint = evt.mapPoint;
+                       /*
+                        Get property details on mapclick
+                      */
+                      
+                        var q = new Query();
+                        q.geometry = mapPoint;
+                        q.returnGeometry = true;
+                        q.outFields = ["*"];
+
+                        var qt = new QueryTask("https://citymaps.capetown.gov.za/agsext1/rest/services/Search_Layers/SL_RGDB_PRTY/MapServer/0");
+
+                        var getPropDeets = qt.execute(q);
+
+                        getPropDeets.then(function (featureSet) {
+                        console.log("getPropDeets", featureSet);
+                                         
+	                 var streetName = featureSet.features[0].attributes.STR_NAME + " " + featureSet.features[0].attributes.LU_STR_NAME_TYPE;
+                            
+                     var esriAddr =  featureSet.features[0].attributes.ADR_NO + " " + streetName + " " + featureSet.features[0].attributes.OFC_SBRB_NAME;
+                            
+                            var esriAddress = {
+                            	"streetNo"   : featureSet.features[0].attributes.ADR_NO,
+                                "streetName" : 	streetName,
+								"suburb"     : featureSet.features[0].attributes.OFC_SBRB_NAME
+				                            };
+				                            
+				           var streetNo = featureSet.features[0].attributes.ADR_NO;
+				           var streetName = streetName;
+				           var suburb = featureSet.features[0].attributes.OFC_SBRB_NAME;
+
+							document.getElementById("txtSolrSearch").value = esriAddr;
+							
+							var myDataAddr = [esriAddress];
+
+							var arrayAddress = JSON.stringify(myDataAddr);
+							sessionStorage.setItem("addressToPass",arrayAddress);
+							
+ 							// alert("Property selected...click Property Address button to view")
+                               ////Open the modal after setting the details
+
+                                document.getElementById("theAddress").innerHTML = "Street No: " + streetNo + "<br>" + "Street Name: " + streetName + "<br>" + "Suburb: " + suburb;
+
+                                if ((streetNo != "" && streetNo != undefined && streetNo != null) && (streetName != "" && streetName != undefined && streetName != null)) {
+
+                                    modal.style.display = "block";
+                                }				                           
+                            
+                             var features = featureSet.features;
+
+                            for (i = 0; i < features.length; i++) {
+
+                                var geo = features[i].geometry;
+
+                                var centroid = geo.getCentroid();
+
+                                //var sym = new SimpleMarkerSymbol();
+               
+                                var gra = new Graphic(centroid,smsFault)
+                                map.graphics.add(gra);
+                                //map.centerAndZoom(centroid, 0.8);
+                                focusMap(centroid)
+                            }
+                        })
+                      
+                    }) 
+                      /*
+                       This Function allow to Zoom to Map and focus on the exact Property search.
+                       Date: 22/08/2022
+                       Author: Bongani Klaas
+                    */
+
+                    function focusMap(mapPoint) {
+                        var centerAt = map.setScale(750);
+                        centerAt.then(function () {
+                            map.centerAt(mapPoint);
+                        })
+                    }
+                  
+
+                    /*
+                        Once all the layers are added to the map object, a layerlist is created to toggle layer visibility
+                    */
+                    map.on("layers-add-result", function (result) {
+
+                        var lyrs = result.layers.filter(function (lyr) {
+                            return lyr.layer.url != null;
+                        })
+
+                         console.log("layers",lyrs)
+
+                        $layerlist = $("#layerlistDiv")
+                       // console.log($layerlist)
+                        var layerlist = new LayerList({
+                            map: map,
+                            showLegend: true,
+                            showSubLayers: true,
+                            showOpacitySlider: true,
+                            layers: lyrs,
+                            visible: true
+                        }, "layerlistDiv");
+                        layerlist.startup()
+                    })
+
+                    /*
+                        Query Solr using JQuery ajax within JQuery autocomplete for suggestions.
+                        This example queries the street address facet which returns an ISISKey/EGISKey/LISKey which we use to
+                        query the Property Layer.
+                    */
+                    var $txtSolrSearch = $('#txtSolrSearch').autocomplete({
+                  
+                        source: function (request, response) {
+                            $.ajax({
+                                //NOTE: The internal Solr search Server still needs to be assigned a DNS alias
+                               // url: "http://imapsearch.capetown.gov.za:8983/solr/coct/select",
+                                url: "https://mapsearch.capetown.gov.za/solr/coct/select",
+                                data: {
+                                    q: 'fulltext:' + $.trim(request.term) + '~',
+                                    wt: 'json',
+                                    fq: 'facet:StreetAddress', // StreetAddress is one of the facets available others are: POI, Parcel, Suburb, Street, Crossroads, Informal
+                                    rows: 20
+                                },
+                                dataType: 'json', // change the jsonp to json - jsonp no longer works!
+                               // jsonp: 'json.wrf',
+                                success: function (results) {
+                                    
+                                    var candidates = results.response.docs
+                                    response($.map(candidates, function (item) {
+                                        if (response != null) {
+                                            var address = item.fulltext;
+                                            var isisKey = item.pid;
+
+                                            return {
+                                                label: address,
+                                                value: address,
+                                                ISISKey: isisKey
+                                            }
+                                        }
+                                    }));
+                                },
+                                error: function (XMLHttpRequest) {
+                                    console.log(JSON.stringify(XMLHttpRequest))
+                                    alert("An error occured retrieving autocomplete address search results")
+
+                                }
+                            });
+                        },
+
+                        select: function (event, ui) {
+                            //alert(JSON.stringify(ui.item))
+                            $txtSolrSearch.val(ui.item.label);
+                           // map.graphics.clear();
+                            var q = new Query();
+                            q.where = "SL_LAND_PRCL_KEY = " + ui.item.ISISKey;
+                            q.returnGeometry = true;
+                            q.outFields = ["*"];
+
+                          // var qt = new QueryTask("http://imap.capetown.gov.za:6080/arcgis/rest/services/Search_Layers/SL_RGDB_PRTY/MapServer/0");
+                            var qt = new QueryTask("https://citymaps.capetown.gov.za/agsext1/rest/services/Search_Layers/SL_RGDB_PRTY/MapServer/0");
+
+                            var getPropDeets = qt.execute(q);
+
+                            getPropDeets.then(function (featureSet) {
+                                console.log("getPropDeets", featureSet);
+
+                                var features = featureSet.features;
+
+                                for (i = 0; i < features.length; i++) {
+
+                                    var geo = features[i].geometry;
+
+                                    var centroid = geo.getCentroid();
+                                    map.graphics.clear();
+                                    var sym = new SimpleMarkerSymbol();
+                                    var gra = new Graphic(centroid, sym)
+                                    map.graphics.add(gra);
+                                    //map.centerAndZoom(centroid, 0.50);
+                                    focusMap(centroid)  // new addition to the Map
+                                }
+                            })
+                        }
+                    })
+
+                })
+        })
+    </script>
+
+</head>
+<body>   
+    <div id="mapDiv">
+        <input id="txtSolrSearch" type="text"  class="solrSearch" />   
+        <div id="HomeButton"></div>        
+        <div id="layerlistDiv"></div>
+        
+    </div>
+    
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Property Details</h2>
+            </div>
+            <div class="modal-body">
+                <p id="theAddress"></p>
+            </div>
+ 
+        </div>
+
+    </div>
+    
+</body>
+</html>

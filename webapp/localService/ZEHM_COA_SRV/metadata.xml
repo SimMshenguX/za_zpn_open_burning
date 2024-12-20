@@ -1,0 +1,494 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZEHM_COA_SRV" xml:lang="en" sap:schema-version="1">
+            <EntityType Name="Property" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="PLNO"/>
+                </Key>
+                <Property Name="AOID" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Arch.Obj. ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CASE_GUID" Type="Edm.Guid" sap:unicode="false" sap:label="Case Key" sap:creatable="false"/>
+                <Property Name="AOTYPE" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="ArchObjTyp" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PLAN_EXIST" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="Plan Exist" sap:creatable="false"/>
+                <Property Name="OBJID" Type="Edm.String" MaxLength="32" sap:unicode="false" sap:label="Document ID" sap:creatable="false"/>
+                <Property Name="SCHEME_NAME" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Scheme Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CLASS" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Document Class" sap:creatable="false"/>
+                <Property Name="UNIT_NUMBER" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Unit No." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="POSNR" Type="Edm.String" MaxLength="6" sap:unicode="false" sap:label="Item Number" sap:creatable="false"/>
+                <Property Name="SECTION_ID" Type="Edm.String" Nullable="false" MaxLength="13" sap:unicode="false" sap:label="Section ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PLNO" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Parcel Number" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="CATEGORY" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="Property Category" sap:creatable="false"/>
+                <Property Name="IS_FREEHOLD" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="Freehold" sap:creatable="false"/>
+                <Property Name="IS_SECTIONAL" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="Sectional Title" sap:creatable="false"/>
+                <Property Name="CHANGED_AT" Type="Edm.Time" Precision="0" sap:unicode="false" sap:label="Time" sap:creatable="false"/>
+                <Property Name="CHANGED_ON" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Current Date" sap:creatable="false"/>
+                <Property Name="CHANGED_BY" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="User Name" sap:creatable="false"/>
+                <Property Name="DELETED" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="Deletion Indicator" sap:creatable="false"/>
+                <Property Name="ADDRESS" Type="Edm.String" MaxLength="80" sap:unicode="false" sap:label="Address" sap:creatable="false"/>
+                <Property Name="ALLOTMENT" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="Location Key" sap:creatable="false"/>
+                <Property Name="ALLOTMENT_NAME" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="Allotment Desc." sap:creatable="false"/>
+                <Property Name="ERFNO" Type="Edm.String" MaxLength="8" sap:unicode="false" sap:label="ERF / Farm No." sap:creatable="false"/>
+                <Property Name="AREA" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Area" sap:creatable="false"/>
+                <Property Name="REGION" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Region" sap:creatable="false"/>
+                <Property Name="SUBCOUNCIL" Type="Edm.String" MaxLength="50" sap:unicode="false" sap:label="Sub Council" sap:creatable="false"/>
+                <Property Name="WARD" Type="Edm.String" MaxLength="8" sap:unicode="false" sap:label="Ward Information" sap:creatable="false"/>
+                <Property Name="SECTIONAL_TITLE" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="Name of ArchObj" sap:creatable="false"/>
+                <Property Name="PROPERTY_DESCR" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="Parcel Name" sap:creatable="false"/>
+                <Property Name="STREET" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="Street" sap:creatable="false"/>
+                <Property Name="HOUSE_NO" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="House Number" sap:creatable="false"/>
+                <Property Name="CITY" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="City" sap:creatable="false"/>
+                <Property Name="POSTL_CODE" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Postal Code" sap:creatable="false"/>
+                <Property Name="COUNTRY" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="Country" sap:creatable="false"/>
+                <Property Name="DISTRICT" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="District Office" sap:creatable="false"/>
+                <Property Name="DISTRICT_NAME" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="District Office Name" sap:creatable="false"/>
+                <Property Name="PARTNER" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:creatable="false"/>
+                <Property Name="ROLE" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Party Role" sap:creatable="false"/>
+                <Property Name="STATUS" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="Status" sap:creatable="false"/>
+                <Property Name="STATUS_DESCR" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Status Descr." sap:creatable="false"/>
+                <Property Name="CASE_TYPE" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Case Type" sap:creatable="false"/>
+                <Property Name="CASE_TYPE_DESCR" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Name" sap:creatable="false"/>
+                <Property Name="EXT_KEY" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="Case ID" sap:creatable="false"/>
+                <Property Name="CASE_TITLE" Type="Edm.String" MaxLength="80" sap:unicode="false" sap:label="Title" sap:creatable="false"/>
+                <NavigationProperty Name="PartySet" Relationship="ZEHM_COA_SRV.PropertyToParty" FromRole="FromRole_PropertyToParty" ToRole="ToRole_PropertyToParty"/>
+                <NavigationProperty Name="PropertySearch" Relationship="ZEHM_COA_SRV.PropertySearchToProperty" FromRole="ToRole_PropertySearchToProperty" ToRole="FromRole_PropertySearchToProperty"/>
+            </EntityType>
+            <EntityType Name="PropertySearch" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="PLNO"/>
+                </Key>
+                <Property Name="ALLOTINFO" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Allotment Info" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AOID" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Arch.Obj. ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CAN_REQUEST_PROVISIONAL" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Boolean Variables (X=true, space=false)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HOUSE_NUM2" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Supplement" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IS_OWNER" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Boolean Variables (X=true, space=false)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MY_PROPERTIES" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Boolean Variables (X=true, space=false)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CASE_GUID" Type="Edm.Guid" sap:unicode="false" sap:label="Case Key" sap:creatable="false"/>
+                <Property Name="MY_FAVOURITES" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Boolean Variables (X=true, space=false)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="STR_SUPPL3" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Pvt Str/Postnet" sap:creatable="false"/>
+                <Property Name="AOTYPE" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="ArchObjTyp" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LOCATION" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Complex/Pvt Bag" sap:creatable="false"/>
+                <Property Name="POSNR" Type="Edm.String" MaxLength="6" sap:unicode="false" sap:label="Item Number" sap:creatable="false"/>
+                <Property Name="PLNO" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Parcel Number" sap:creatable="false"/>
+                <Property Name="SCHEME_NAME" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Scheme Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CATEGORY" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="Property Category" sap:creatable="false"/>
+                <Property Name="UNIT_NUMBER" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Unit No." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IS_FREEHOLD" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="Freehold" sap:creatable="false"/>
+                <Property Name="SECTION_ID" Type="Edm.String" Nullable="false" MaxLength="13" sap:unicode="false" sap:label="Section ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IS_SECTIONAL" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="Sectional Title" sap:creatable="false"/>
+                <Property Name="CHANGED_AT" Type="Edm.Time" Precision="0" sap:unicode="false" sap:label="Time" sap:creatable="false"/>
+                <Property Name="CHANGED_ON" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Current Date" sap:creatable="false"/>
+                <Property Name="CHANGED_BY" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="User Name" sap:creatable="false"/>
+                <Property Name="DELETED" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="Deletion Indicator" sap:creatable="false"/>
+                <Property Name="ADDRESS" Type="Edm.String" MaxLength="80" sap:unicode="false" sap:label="Address" sap:creatable="false"/>
+                <Property Name="ALLOTMENT" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="Location Key" sap:creatable="false"/>
+                <Property Name="ALLOTMENT_NAME" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="Allotment Desc." sap:creatable="false"/>
+                <Property Name="ERFNO" Type="Edm.String" MaxLength="8" sap:unicode="false" sap:label="ERF / Farm No." sap:creatable="false"/>
+                <Property Name="AREA" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Area" sap:creatable="false"/>
+                <Property Name="REGION" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Region" sap:creatable="false"/>
+                <Property Name="SUBCOUNCIL" Type="Edm.String" MaxLength="50" sap:unicode="false" sap:label="Sub Council" sap:creatable="false"/>
+                <Property Name="WARD" Type="Edm.String" MaxLength="8" sap:unicode="false" sap:label="Ward Information" sap:creatable="false"/>
+                <Property Name="SECTIONAL_TITLE" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="Name of ArchObj" sap:creatable="false"/>
+                <Property Name="PROPERTY_DESCR" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="Parcel Name" sap:creatable="false"/>
+                <Property Name="STREET" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="Street" sap:creatable="false"/>
+                <Property Name="HOUSE_NO" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="House Number" sap:creatable="false"/>
+                <Property Name="CITY" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="City" sap:creatable="false"/>
+                <Property Name="POSTL_CODE" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Postal Code" sap:creatable="false"/>
+                <Property Name="COUNTRY" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="Country" sap:creatable="false"/>
+                <Property Name="DISTRICT" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="District Office" sap:creatable="false"/>
+                <Property Name="DISTRICT_NAME" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="District Office Name" sap:creatable="false"/>
+                <NavigationProperty Name="PropertySet" Relationship="ZEHM_COA_SRV.PropertySearchToProperty" FromRole="FromRole_PropertySearchToProperty" ToRole="ToRole_PropertySearchToProperty"/>
+            </EntityType>
+            <EntityType Name="PropertySearchType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="SERVICE"/>
+                </Key>
+                <Property Name="PROPERTY_TYPE" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Property type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SEARCH_TYPE" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Search Type" sap:creatable="false"/>
+                <Property Name="SERVICE" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Service Type" sap:creatable="false"/>
+                <Property Name="DESCR" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Search Type Text" sap:creatable="false"/>
+            </EntityType>
+            <EntityType Name="Party" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="PARTNER"/>
+                </Key>
+                <Property Name="CASE_GUID" Type="Edm.Guid" sap:unicode="false" sap:label="Case Key" sap:creatable="false"/>
+                <Property Name="POSNR" Type="Edm.String" MaxLength="6" sap:unicode="false" sap:label="Item Number" sap:creatable="false"/>
+                <Property Name="PARTNER" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:creatable="false"/>
+                <Property Name="ROLE" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Party Role" sap:creatable="false"/>
+                <Property Name="CHANGED_AT" Type="Edm.Time" Precision="0" sap:unicode="false" sap:label="Time" sap:creatable="false"/>
+                <Property Name="CHANGED_ON" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Current Date" sap:creatable="false"/>
+                <Property Name="CHANGED_BY" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="User Name" sap:creatable="false"/>
+                <Property Name="DELETED" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="Deletion Indicator" sap:creatable="false"/>
+                <Property Name="NAME" Type="Edm.String" MaxLength="80" sap:unicode="false" sap:label="Full Name" sap:creatable="false"/>
+                <Property Name="PERNR" Type="Edm.String" MaxLength="8" sap:unicode="false" sap:label="Personnel No." sap:creatable="false"/>
+                <Property Name="BP_TYPE" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="Partner cat." sap:creatable="false"/>
+                <Property Name="ID_TYPE" Type="Edm.String" MaxLength="6" sap:unicode="false" sap:label="ID Type" sap:creatable="false"/>
+                <Property Name="ID_NUMBER" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="ID number" sap:creatable="false"/>
+                <Property Name="ADDRESS" Type="Edm.String" MaxLength="120" sap:unicode="false" sap:label="Address" sap:creatable="false"/>
+                <Property Name="CELLPHONENO" Type="Edm.String" MaxLength="15" sap:unicode="false" sap:label="Cellphone Number" sap:creatable="false"/>
+                <Property Name="HOMEPHONENO" Type="Edm.String" MaxLength="15" sap:unicode="false" sap:label="Home Phone Number" sap:creatable="false"/>
+                <Property Name="WORKPHONENO" Type="Edm.String" MaxLength="15" sap:unicode="false" sap:label="Work Phone Number" sap:creatable="false"/>
+                <Property Name="EMAILADDRESS" Type="Edm.String" MaxLength="120" sap:unicode="false" sap:label="Email Address" sap:creatable="false"/>
+                <Property Name="PLNO" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Parcel Number" sap:creatable="false"/>
+                <NavigationProperty Name="Property" Relationship="ZEHM_COA_SRV.PropertyToParty" FromRole="ToRole_PropertyToParty" ToRole="FromRole_PropertyToParty"/>
+            </EntityType>
+            <EntityType Name="Allotment" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="LOCSYS"/>
+                    <PropertyRef Name="LOCHIER"/>
+                </Key>
+                <Property Name="MANDT" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="Client"/>
+                <Property Name="LOCSYS" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Loc.Struct. ID"/>
+                <Property Name="LOCHIER" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Location Key"/>
+                <Property Name="XLOCHIER" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="Locat. Key Text"/>
+            </EntityType>
+            <EntityType Name="Content" m:HasStream="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CLASS"/>
+                    <PropertyRef Name="OBJID"/>
+                </Key>
+                <Property Name="DOC_TYPE" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Document Type" sap:creatable="false"/>
+                <Property Name="POSNR" Type="Edm.String" MaxLength="6" sap:unicode="false" sap:label="Item Number" sap:creatable="false"/>
+                <Property Name="CONTENT" Type="Edm.String" sap:unicode="false" sap:label="Content" sap:creatable="false"/>
+                <Property Name="FILENAME" Type="Edm.String" MaxLength="128" sap:unicode="false" sap:label="Filename" sap:creatable="false"/>
+                <Property Name="FILETYPE" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="File Type" sap:creatable="false"/>
+                <Property Name="CLASS" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Document Class" sap:creatable="false"/>
+                <Property Name="OBJID" Type="Edm.String" Nullable="false" MaxLength="32" sap:unicode="false" sap:label="Document ID" sap:creatable="false"/>
+                <Property Name="ANCHOR" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Anchor" sap:creatable="false"/>
+                <Property Name="DESCRIPTION" Type="Edm.String" MaxLength="128" sap:unicode="false" sap:label="Document Description" sap:creatable="false"/>
+                <Property Name="FOLDER_DESCRIPTION" Type="Edm.String" MaxLength="128" sap:unicode="false" sap:label="Document Description" sap:creatable="false"/>
+                <Property Name="SPS_ID" Type="Edm.String" MaxLength="32" sap:unicode="false" sap:label="Document SPS ID" sap:creatable="false"/>
+                <Property Name="LAST_MODIFIED_DATE" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Document Date" sap:creatable="false"/>
+                <Property Name="LAST_MODIFIED_TIME" Type="Edm.Time" Precision="0" sap:unicode="false" sap:label="Document Time" sap:creatable="false"/>
+                <Property Name="CASE_GUID" Type="Edm.Guid" sap:unicode="false" sap:label="Case Key" sap:creatable="false"/>
+                <Property Name="CASE_TYPE" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Case Type" sap:creatable="false"/>
+                <Property Name="EXT_KEY" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="Case ID" sap:creatable="false"/>
+                <Property Name="CASE_TITLE" Type="Edm.String" MaxLength="80" sap:unicode="false" sap:label="Title" sap:creatable="false"/>
+                <Property Name="PLNO" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Parcel Number" sap:creatable="false"/>
+                <NavigationProperty Name="Document" Relationship="ZEHM_COA_SRV.DocumentToContent" FromRole="ToRole_DocumentToContent" ToRole="FromRole_DocumentToContent"/>
+            </EntityType>
+            <EntityType Name="Document" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CLASS"/>
+                    <PropertyRef Name="OBJID"/>
+                </Key>
+                <Property Name="ANCHOR_DESCRIPTION" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="APRROVAL_DATE" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Approval Date" sap:creatable="false"/>
+                <Property Name="DOCUMENT_NATIVE_NAME" Type="Edm.String" Nullable="false" MaxLength="64" sap:unicode="false" sap:label="Native Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="POSNR" Type="Edm.String" MaxLength="6" sap:unicode="false" sap:label="Item Number" sap:creatable="false"/>
+                <Property Name="FILENAME" Type="Edm.String" MaxLength="128" sap:unicode="false" sap:label="Filename" sap:creatable="false"/>
+                <Property Name="FILETYPE" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="File Type" sap:creatable="false"/>
+                <Property Name="CLASS" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Document Class" sap:creatable="false"/>
+                <Property Name="OBJID" Type="Edm.String" Nullable="false" MaxLength="32" sap:unicode="false" sap:label="Document ID" sap:creatable="false"/>
+                <Property Name="ANCHOR" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Anchor" sap:creatable="false"/>
+                <Property Name="DESCRIPTION" Type="Edm.String" MaxLength="128" sap:unicode="false" sap:label="Document Description" sap:creatable="false"/>
+                <Property Name="FOLDER_DESCRIPTION" Type="Edm.String" MaxLength="128" sap:unicode="false" sap:label="Document Description" sap:creatable="false"/>
+                <Property Name="SPS_ID" Type="Edm.String" MaxLength="32" sap:unicode="false" sap:label="Document SPS ID" sap:creatable="false"/>
+                <Property Name="LAST_MODIFIED_DATE" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Document Date" sap:creatable="false"/>
+                <Property Name="LAST_MODIFIED_TIME" Type="Edm.Time" Precision="0" sap:unicode="false" sap:label="Document Time" sap:creatable="false"/>
+                <Property Name="CASE_GUID" Type="Edm.Guid" sap:unicode="false" sap:label="Case Key" sap:creatable="false"/>
+                <Property Name="CASE_TYPE" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Case Type" sap:creatable="false"/>
+                <Property Name="EXT_KEY" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="Case ID" sap:creatable="false"/>
+                <Property Name="CASE_TITLE" Type="Edm.String" MaxLength="80" sap:unicode="false" sap:label="Title" sap:creatable="false"/>
+                <Property Name="PLNO" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Parcel Number" sap:creatable="false"/>
+                <Property Name="DOC_TYPE" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Document Type" sap:creatable="false"/>
+                <NavigationProperty Name="ContentSet" Relationship="ZEHM_COA_SRV.DocumentToContent" FromRole="FromRole_DocumentToContent" ToRole="ToRole_DocumentToContent"/>
+            </EntityType>
+            <EntityType Name="LoginParty" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="PARTNER"/>
+                </Key>
+                <Property Name="CASE_GUID" Type="Edm.Guid" sap:unicode="false" sap:label="Case Key" sap:creatable="false"/>
+                <Property Name="ROLE" Type="Edm.String" MaxLength="6" sap:unicode="false" sap:label="Party Role" sap:creatable="false"/>
+                <Property Name="VAT_NUMBER" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="ID number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="COMPANY_NAME" Type="Edm.String" Nullable="false" MaxLength="80" sap:unicode="false" sap:label="Full Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="POSNR" Type="Edm.String" MaxLength="6" sap:unicode="false" sap:label="Item Number" sap:creatable="false"/>
+                <Property Name="PARTNER" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:creatable="false"/>
+                <Property Name="CHANGED_AT" Type="Edm.Time" Precision="0" sap:unicode="false" sap:label="Time" sap:creatable="false"/>
+                <Property Name="CHANGED_ON" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Current Date" sap:creatable="false"/>
+                <Property Name="CHANGED_BY" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="User Name" sap:creatable="false"/>
+                <Property Name="DELETED" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="Deletion Indicator" sap:creatable="false"/>
+                <Property Name="NAME" Type="Edm.String" MaxLength="80" sap:unicode="false" sap:label="Full Name" sap:creatable="false"/>
+                <Property Name="PERNR" Type="Edm.String" MaxLength="8" sap:unicode="false" sap:label="Personnel No." sap:creatable="false"/>
+                <Property Name="BP_TYPE" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="Partner cat." sap:creatable="false"/>
+                <Property Name="ID_TYPE" Type="Edm.String" MaxLength="6" sap:unicode="false" sap:label="ID Type" sap:creatable="false"/>
+                <Property Name="ID_NUMBER" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="ID number" sap:creatable="false"/>
+                <Property Name="ADDRESS" Type="Edm.String" MaxLength="120" sap:unicode="false" sap:label="Address" sap:creatable="false"/>
+                <Property Name="CELLPHONENO" Type="Edm.String" MaxLength="15" sap:unicode="false" sap:label="Cellphone Number" sap:creatable="false"/>
+                <Property Name="HOMEPHONENO" Type="Edm.String" MaxLength="15" sap:unicode="false" sap:label="Home Phone Number" sap:creatable="false"/>
+                <Property Name="WORKPHONENO" Type="Edm.String" MaxLength="15" sap:unicode="false" sap:label="Work Phone Number" sap:creatable="false"/>
+                <Property Name="EMAILADDRESS" Type="Edm.String" MaxLength="120" sap:unicode="false" sap:label="Email Address" sap:creatable="false"/>
+                <Property Name="PLNO" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Parcel Number" sap:creatable="false"/>
+            </EntityType>
+            <EntityType Name="App_type" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ApplicationType"/>
+                </Key>
+                <Property Name="ApplicationType" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Application Type"/>
+                <Property Name="ApplicationDescription" Type="Edm.String" sap:unicode="false" sap:label="Application Description"/>
+            </EntityType>
+            <EntityType Name="BasePremise" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Premise"/>
+                </Key>
+                <Property Name="Premise" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Premise"/>
+                <Property Name="Description" Type="Edm.String" sap:unicode="false" sap:label="Description"/>
+            </EntityType>
+            <EntityType Name="FoodPremise" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Premise"/>
+                </Key>
+                <Property Name="Premise" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Premise"/>
+                <Property Name="Description" Type="Edm.String" sap:unicode="false" sap:label="Description"/>
+            </EntityType>
+            <EntityType Name="PremiseType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Premise"/>
+                </Key>
+                <Property Name="Premise" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Premise"/>
+                <Property Name="Description" Type="Edm.String" sap:unicode="false" sap:label="Description"/>
+            </EntityType>
+            <EntityType Name="CaseHeader" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CaseGuid"/>
+                </Key>
+                <Property Name="CaseGuid" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Case Key"/>
+                <Property Name="CaseId" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="Case ID"/>
+                <Property Name="CaseType" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Case Type"/>
+                <Property Name="ApplicationType" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="Application Type"/>
+                <Property Name="ServiceType" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="Service Type"/>
+                <Property Name="BasePremise" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="Base Premise"/>
+                <Property Name="BusinessEntity" Type="Edm.String" sap:unicode="false" sap:label="Business Entity"/>
+                <Property Name="FoodPremise" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="Food Premise"/>
+                <Property Name="PremiseType" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="Premise Type"/>
+                <Property Name="InstitutionType" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="Institution Type"/>
+                <Property Name="CowsMilked" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Cows to be Milked"/>
+                <Property Name="ApplicantBP" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Applicant BP"/>
+                <Property Name="OwnerBP" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Owner BP"/>
+                <Property Name="PayerBP" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Payer BP"/>
+                <Property Name="PropertyParcelNo" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Property where product can be inspected"/>
+                <Property Name="PersonInChargeBP" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Person In Charge BP"/>
+            </EntityType>
+            <EntityType Name="NatureHandiling" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Nature"/>
+                </Key>
+                <Property Name="Nature" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Nature Of Handling"/>
+                <Property Name="Description" Type="Edm.String" sap:unicode="false" sap:label="Description"/>
+            </EntityType>
+            <EntityType Name="Note" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CASE_GUID"/>
+                </Key>
+                <Property Name="CASE_NO" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Case ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CLASS" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Document Class" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PLNO" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Parcel Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="QUOTATION" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Boolean Variables (X=true, space=false)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SUBCOMP_NAME" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Function(Comp.)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CASE_GUID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Case Key" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OBJID" Type="Edm.String" Nullable="false" MaxLength="32" sap:unicode="false" sap:label="Document ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PROFOMA" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Boolean Variables (X=true, space=false)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="POSNR" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="Item Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NOTES" Type="Edm.String" Nullable="false" MaxLength="2048" sap:unicode="false" sap:label="2048 Character Text Field" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Nature" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Nature Of Handling" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EnvisagedProdOutput" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Envisaged Prod. Output" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ExemptionParticulars" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Particulars of Exemption" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Exemption" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Exemption" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PersonsCateredFor" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Persons catered for" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="InstitutionType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Institution"/>
+                </Key>
+                <Property Name="Institution" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Institution Type"/>
+                <Property Name="Description" Type="Edm.String" sap:unicode="false" sap:label="Description"/>
+            </EntityType>
+            <EntityType Name="Location" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CaseGuid"/>
+                </Key>
+                <Property Name="GpsLatitude" Type="Edm.Decimal" Nullable="false" Precision="25" Scale="10" sap:unicode="false" sap:label="Latitude" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="GpsLongitude" Type="Edm.Decimal" Nullable="false" Precision="25" Scale="10" sap:unicode="false" sap:label="Longitude" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="StreetNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="House Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Street1" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Street" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Street2" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Street 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Suburb" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="District" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NameOfBuilding" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Building Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Floor" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Floor" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UnitNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Room Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Allotment" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="Allotment Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="City" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="City" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PostalCode" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Postal Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ErfNumber" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Farm Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ward" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Ward ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Subcouncil" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Sub Council ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LocationType" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Facet" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="GpsLatitudeMobile" Type="Edm.Decimal" Nullable="false" Precision="25" Scale="10" sap:unicode="false" sap:label="Latitude" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="GpsLongitudeMobile" Type="Edm.Decimal" Nullable="false" Precision="25" Scale="10" sap:unicode="false" sap:label="Longitude" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CaseGuid" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Case Key"/>
+            </EntityType>
+            <EntityType Name="Vehicle" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CaseGuid"/>
+                </Key>
+                <Property Name="CaseGuid" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Case Key"/>
+                <Property Name="LicenceNumber" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="false" sap:label="Number Plate" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LicenceNumberPrevious" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="false" sap:label="Previous Licence Pla" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RegisterNumber" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Vehicle Reg. No." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vin" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="VIN Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VehicleMake" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Vehicle Make" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VehicleType" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Vehicle Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VehicleMakeText" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Vehicle Make" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VehicleTypeText" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Vehicle Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IsTaxi" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Taxi?" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PubTransportType" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Pub. Transport Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Vehicle Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EngineNumber" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Engine Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Colour" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Vehicle Colour" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VehicleSeries" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Vehicle Series" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VehicleModel" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Vehicle Model" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PermitVerificationSuccessful" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Permit verification" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VerificationReferenceNumber" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Permit verify ref." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VerificationOutcome" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Permit verification" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VerificationOutcomeText" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Permt Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FailureReason" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Permit fail reason" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PersonIncharge" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Person in charge" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Checklist" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Anchor"/>
+                    <PropertyRef Name="Doctype"/>
+                </Key>
+                <Property Name="Anchor" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Anchor" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Doctype" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Document Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Optionality" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Optionality" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Multiplicity" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Multiplicity" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CaseType" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Case Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CaseGuid" Type="Edm.String" Nullable="false" MaxLength="32" sap:unicode="false" sap:label="Case Key" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="FuelBurningEquipType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="EquipmentType"/>
+                </Key>
+                <Property Name="EquipmentType" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Equipment Type"/>
+                <Property Name="EquipmentTypeDescr" Type="Edm.String" sap:unicode="false" sap:label="Equipment Type Descr."/>
+            </EntityType>
+            <EntityType Name="FuelBurningEquipment" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CASE_GUID"/>
+                </Key>
+                <Property Name="FuelBurningEquipType" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Fuel Burning Equipment" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CASE_GUID" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Case Key" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="CaseStatus" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CaseGuid"/>
+                </Key>
+                <Property Name="ConfirmInfoOK" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Confirm Information"/>
+                <Property Name="CaseGuid" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Case Key"/>
+            </EntityType>
+            <EntityType Name="Contact" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CaseGuid"/>
+                </Key>
+                <Property Name="CaseGuid" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Case Key" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FirstName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LastName" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Name 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HouseNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="House Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Street" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Street" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="City" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="City" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PostalCode" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Postal Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EmailAddress" Type="Edm.String" Nullable="false" MaxLength="241" sap:unicode="false" sap:label="E-Mail Address" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TelephoneNumber" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Telephone" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MobileNumber" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Telephone" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fax" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Fax" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Role" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Role" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Male" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Male" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Femlae" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Female" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="DocumentToContent" sap:content-version="1">
+                <End Type="ZEHM_COA_SRV.Document" Multiplicity="1" Role="FromRole_DocumentToContent"/>
+                <End Type="ZEHM_COA_SRV.Content" Multiplicity="0..1" Role="ToRole_DocumentToContent"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_DocumentToContent">
+                        <PropertyRef Name="OBJID"/>
+                        <PropertyRef Name="CLASS"/>
+                    </Principal>
+                    <Dependent Role="ToRole_DocumentToContent">
+                        <PropertyRef Name="OBJID"/>
+                        <PropertyRef Name="CLASS"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="PropertySearchToProperty" sap:content-version="1" sap:label="Navigate from Property Search to Property">
+                <End Type="ZEHM_COA_SRV.PropertySearch" Multiplicity="1" Role="FromRole_PropertySearchToProperty"/>
+                <End Type="ZEHM_COA_SRV.Property" Multiplicity="*" Role="ToRole_PropertySearchToProperty"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_PropertySearchToProperty">
+                        <PropertyRef Name="PLNO"/>
+                    </Principal>
+                    <Dependent Role="ToRole_PropertySearchToProperty">
+                        <PropertyRef Name="PLNO"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="PropertyToParty" sap:content-version="1">
+                <End Type="ZEHM_COA_SRV.Property" Multiplicity="1" Role="FromRole_PropertyToParty"/>
+                <End Type="ZEHM_COA_SRV.Party" Multiplicity="*" Role="ToRole_PropertyToParty"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_PropertyToParty">
+                        <PropertyRef Name="PLNO"/>
+                    </Principal>
+                    <Dependent Role="ToRole_PropertyToParty">
+                        <PropertyRef Name="PLNO"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZEHM_COA_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="PropertySet" EntityType="ZEHM_COA_SRV.Property" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="PropertySearchSet" EntityType="ZEHM_COA_SRV.PropertySearch" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="PropertySearchTypeSet" EntityType="ZEHM_COA_SRV.PropertySearchType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="PartySet" EntityType="ZEHM_COA_SRV.Party" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="AllotmentSet" EntityType="ZEHM_COA_SRV.Allotment" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ContentSet" EntityType="ZEHM_COA_SRV.Content" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="DocumentSet" EntityType="ZEHM_COA_SRV.Document" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="LoginPartySet" EntityType="ZEHM_COA_SRV.LoginParty" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="App_typeSet" EntityType="ZEHM_COA_SRV.App_type" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="BasePremiseSet" EntityType="ZEHM_COA_SRV.BasePremise" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="FoodPremiseSet" EntityType="ZEHM_COA_SRV.FoodPremise" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="PremiseTypeSet" EntityType="ZEHM_COA_SRV.PremiseType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="CaseHeaderSet" EntityType="ZEHM_COA_SRV.CaseHeader" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="NatureHandilingSet" EntityType="ZEHM_COA_SRV.NatureHandiling" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="NoteSet" EntityType="ZEHM_COA_SRV.Note" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="InstitutionTypeSet" EntityType="ZEHM_COA_SRV.InstitutionType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="LocationSet" EntityType="ZEHM_COA_SRV.Location" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="VehicleSet" EntityType="ZEHM_COA_SRV.Vehicle" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ChecklistSet" EntityType="ZEHM_COA_SRV.Checklist" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="FuelBurningEquipTypeSet" EntityType="ZEHM_COA_SRV.FuelBurningEquipType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="FuelBurningEquipmentSet" EntityType="ZEHM_COA_SRV.FuelBurningEquipment" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="CaseStatusSet" EntityType="ZEHM_COA_SRV.CaseStatus" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ContactSet" EntityType="ZEHM_COA_SRV.Contact" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <AssociationSet Name="PropertyToPartySet" Association="ZEHM_COA_SRV.PropertyToParty" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="PropertySet" Role="FromRole_PropertyToParty"/>
+                    <End EntitySet="PartySet" Role="ToRole_PropertyToParty"/>
+                </AssociationSet>
+                <AssociationSet Name="DocumentToContentSet" Association="ZEHM_COA_SRV.DocumentToContent" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="DocumentSet" Role="FromRole_DocumentToContent"/>
+                    <End EntitySet="ContentSet" Role="ToRole_DocumentToContent"/>
+                </AssociationSet>
+                <AssociationSet Name="PropertySearchToPropertySet" Association="ZEHM_COA_SRV.PropertySearchToProperty" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="PropertySearchSet" Role="FromRole_PropertySearchToProperty"/>
+                    <End EntitySet="PropertySet" Role="ToRole_PropertySearchToProperty"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link
+                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZEHM_COA_SRV/$metadata"/>
+                <atom:link
+                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZEHM_COA_SRV/$metadata"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>

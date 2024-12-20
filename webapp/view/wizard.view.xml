@@ -1,0 +1,2501 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.f"
+    xmlns:u="sap.ui.unified"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    controllerName="capetown.gov.za_ZPN_OPEN_BURNING.controller.wizard"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:vk="sap.ui.vk"
+    xmlns:vbm="sap.ui.vbm"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    displayBlock="true"
+    xmlns:table="sap.ui.table"
+    xmlns:Property="zcase_util.controls.Property"
+    height="100%"
+>
+    <App id="app">
+        <NavContainer
+            id="navContainerWizard"
+            class="sapUiContentPadding"
+        >
+            <pages>
+                <!-- DynamicPage Title -->
+                <f:DynamicPage
+                    id="dynamicPage"
+                    class="sapUiNoContentPadding"
+                    showFooter="true"
+                >
+                    <f:title>
+                        <f:DynamicPageTitle>
+                            <f:heading>
+                                <!--<Title text="Header Title"/>-->
+                                <Image
+                                    src="{imageModel>/path}/logo.png"
+                                    alt="Logo"
+                                    width="200px"
+                                    height="70px"
+                                />
+                            </f:heading>
+                        </f:DynamicPageTitle>
+                        <!--</VBox>-->
+                    </f:title>
+                    <f:header>
+                        <!--<Title text="Header Title"/>-->
+                        <f:DynamicPageHeader pinnable="true">
+                            <FlexBox justifyContent="SpaceBetween">
+                                <VBox class="sapUiMediumMarginEnd">
+                                    <Title
+                                        text="Air Quality Management Open Burning Application"
+                                        class="myCustomHeader"
+                                    />
+                                </VBox>
+                                <VBox class="sapUiMediumMarginEnd">
+                                    <ObjectAttribute
+                                        title="Case Id"
+                                        id="objTitle"
+                                        text=" {oCaseModel>/caseID}"
+                                    />
+                                    <ObjectAttribute
+                                        title="Case Type"
+                                        text=" Open Burning"
+                                    />
+                                </VBox>
+                            </FlexBox>
+                        </f:DynamicPageHeader>
+                    </f:header>
+                    <!-- DynamicPage Header -->
+                    <f:content>
+                        <Wizard
+                            id="wizMain"
+                            class="sapUiResponsivePadding--header sapUiResponsivePadding--content"
+                            complete="completedHandler"
+                            height="100%"
+                            showNextButton="false"
+                            enableBranching="true"
+                        >	
+							
+                            <WizardStep
+                                id="stepAppPropertySearch"
+                                title="Property Search"
+                                subsequentSteps="stepAppPolyGon"
+                                icon="sap-icon://font-awesome/circle">
+                                <VBox
+                                    class="customForm"
+                                    alignItems="Center"
+                                    width="100%"
+                                >
+                                    <VBox
+                                        width="70%"
+                                        class="sapUiLargeMarginTop"
+                                        justifyContent="Center"
+                                        alignItems="Center"
+                                    />
+                                    <VBox
+                                        width="70%"
+                                        class="myCustomMargin"
+                                    >
+                                        <!-- <Text text=" {i18n>txtApplicationDetails}" textAlign="Center"/> -->
+                                        <!-- <Text text=" {i18n>txtDetails}" textAlign="Center"/> -->
+                                        <MessageStrip
+                                            text="{i18n>txtApplicationDetails}"
+                                            type="Information"
+                                            showIcon="true"
+                                            class="sapUiMediumMarginBottom"
+                                        />
+                                        <MessageStrip
+                                            text="{i18n>txtDetails}"
+                                            type="Information"
+                                            showIcon="true"
+                                            class="sapUiMediumMarginBottom"
+                                        />
+                                    </VBox>
+                                    <form:SimpleForm
+                                        id="frmSearchProperty"
+                                        editable="false"
+                                        layout="ResponsiveGridLayout"
+                                        labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="12"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="1"
+                                        columnsL="1"
+                                        columnsM="1"
+                                        singleContainerFullSize="true"
+                                    >
+                                        <form:content>
+                                            <!-- <core:Title text="{i18n>txtDetails}"/> -->
+                                            <FlexBox direction="Column">
+                                                <Label text="Search by" />
+                                                <l:VerticalLayout
+                                                    alignItems="Center"
+                                                >
+                                                    <ComboBox
+                                                        id="propertyComboBox"
+                                                        items="{ path: 'oModelProperty>/searchProperty' }"
+                                                        selectedKey="{oModelProperty>/selectedProperty}"
+                                                        width="100%"
+                                                        placeholder="Select a field to search"
+                                                        change="onSearchChange"
+                                                    >
+                                                        <core:Item
+                                                            key="{oModelProperty>id}"
+                                                            text="{oModelProperty>text}"
+                                                        />
+                                                    </ComboBox>
+                                                </l:VerticalLayout>
+                                            </FlexBox>
+                                            <Label
+                                                text=""
+                                                class="myCustomMargin"
+                                            />
+                                            <FlexBox
+                                                direction="Column"
+                                                id="flexAllotment"
+                                                visible="false"
+                                            >
+                                                <Text
+                                                    text="Search by ERF number and Allotment:"
+                                                />
+                                                <Label
+                                                    text=""
+                                                    class="myCustomMargin"
+                                                />
+                                                <Text text="Allotment:" />
+                                                <l:VerticalLayout
+                                                    alignItems="Center"
+                                                >
+                                                    <ComboBox
+                                                        id="idbdmAllotmentCombo"
+                                                        placeholder="Choose Allotment "
+                                                        change="onERFChange"
+                                                    >
+                                                        <core:Item
+                                                            key="Abbotsdale"
+                                                            text="ABBOTSDALE"
+                                                        />
+                                                        <core:Item
+                                                            key="AtlanticHill"
+                                                            text="ATLANTIC HILL"
+                                                        />
+                                                        <core:Item
+                                                            key="AtlantisIndustrial"
+                                                            text="ATLANTIS INDUSTRIAL"
+                                                        />
+                                                        <core:Item
+                                                            key="BainskloofPass"
+                                                            text="BAINSKLOOF PASS"
+                                                        />
+                                                        <core:Item
+                                                            key="BakkersHoogte"
+                                                            text="BAKKERSHOOGTE"
+                                                        />
+                                                        <core:Item
+                                                            key="BANTRYBAY"
+                                                            text="BANTRY BAY"
+                                                        />
+                                                        <core:Item
+                                                            key="BERGVLIET"
+                                                            text="BERGVLIET"
+                                                        />
+                                                        <core:Item
+                                                            key="BETTYSBAY"
+                                                            text="BETTYSBAY BAY"
+                                                        />
+                                                    </ComboBox>
+                                                </l:VerticalLayout>
+                                            </FlexBox>
+                                            <Label text="" />
+                                            <FlexBox
+                                                direction="Column"
+                                                id="flexERFNumber"
+                                                visible="false"
+                                            >
+                                                <Text
+                                                    text="ERF number"
+                                                    class="mandatoryLabel"
+                                                />
+                                                <l:VerticalLayout
+                                                    alignItems="Center"
+                                                >
+                                                    <Input
+                                                        id="inpuERFNumber"
+                                                        value=""
+                                                        placeholder="Enter ERF Number"
+                                                        visible="true"
+                                                        required="true"
+                                                    />
+                                                </l:VerticalLayout>
+                                                <Label text="" />
+                                                <l:VerticalLayout
+                                                    alignItems="Center"
+                                                >
+                                                    <Button
+                                                        text="Search"
+                                                        press=".onSearch"
+                                                        type="Emphasized"
+                                                        width="100px"
+                                                    />
+                                                </l:VerticalLayout>
+                                            </FlexBox>
+                                            <FlexBox
+                                                direction="Column"
+                                                id="flexEParcelNumber"
+                                                visible="false"
+                                            >
+                                                <Text text="* Parcel Number:" />
+                                                <l:VerticalLayout
+                                                    alignItems="Center"
+                                                >
+                                                    <Input
+                                                        id="zoneparcelval"
+                                                        value=""
+                                                        placeholder="Enter Parcel Number"
+                                                        visible="true"
+                                                        required="true"
+                                                    />
+                                                </l:VerticalLayout>
+                                                <Label text="" />
+                                                <l:VerticalLayout
+                                                    alignItems="Center"
+                                                >
+                                                    <Button
+                                                        text="Search"
+                                                        press=".onSearch"
+                                                        type="Emphasized"
+                                                        width="100px"
+                                                    />
+                                                </l:VerticalLayout>
+                                            </FlexBox>
+                                            <FlexBox
+                                                direction="Column"
+                                                id="flexStreetAddress"
+                                                visible="false"
+                                            >
+                                                <Text text="* House number" />
+                                                <Label text="" />
+                                                <Input
+                                                    id="zonestreetval"
+                                                    value=""
+                                                    visible="true"
+                                                    width="100%"
+                                                />
+                                                <Text text="* Street Name" />
+                                                <Label text="" />
+                                                <Input
+                                                    id="zoneStreetNamVal"
+                                                    value=""
+                                                    visible="true"
+                                                    width="100%"
+                                                />
+                                                <!--</l:VerticalLayout>-->
+                                                <Label text="" />
+                                                <l:VerticalLayout
+                                                    alignItems="Center"
+                                                    class="customForm"
+                                                >
+                                                    <Button
+                                                        text="Search"
+                                                        press=".onSearch"
+                                                        icon="sap-icon://search"
+                                                        type="Emphasized"
+                                                        width="100px"
+                                                    />
+                                                </l:VerticalLayout>
+                                            </FlexBox>
+                                            <FlexBox
+                                                direction="Column"
+                                                id="flexPrivateAddress"
+                                                visible="false"
+                                            >
+                                                <Label text="Private Street" />
+                                                <Input
+                                                    id="deptpvtStreetval"
+                                                    value=""
+                                                    visible="true"
+                                                    required="true"
+                                                    width="100%"
+                                                />
+                                                <Label text="Suburb" />
+                                                <Input
+                                                    id="inputPrivateSuburb"
+                                                    value=""
+                                                    visible="true"
+                                                    required="true"
+                                                    width="100%"
+                                                />
+                                                <Label
+                                                    text="Complex / Private bag"
+                                                />
+                                                <Input
+                                                    id="deptpvtComplexval"
+                                                    value=""
+                                                    visible="true"
+                                                    required="true"
+                                                    width="100%"
+                                                />
+                                                <Label text="House Number" />
+                                                <Input
+                                                    id="inputHouseNo"
+                                                    value=""
+                                                    visible="true"
+                                                    required="true"
+                                                    width="100%"
+                                                />
+                                                <Label text="Farm Name" />
+                                                <Input
+                                                    id="inputFarmNamePrivate"
+                                                    value=""
+                                                    visible="true"
+                                                    required="true"
+                                                    width="100%"
+                                                />
+                                                <Label text="Estate" />
+                                                <Input
+                                                    id="inEstate"
+                                                    value=""
+                                                    visible="true"
+                                                    required="true"
+                                                    width="100%"
+                                                />
+                                                <Label text="" />
+                                                <l:VerticalLayout
+                                                    class="customForm"
+                                                >
+                                                    <Button
+                                                        text="Search"
+                                                        press=".onSearch"
+                                                        icon="sap-icon://search"
+                                                        type="Emphasized"
+                                                        width="100px"
+                                                    />
+                                                </l:VerticalLayout>
+                                            </FlexBox>
+                                        </form:content>
+                                    </form:SimpleForm>
+                                </VBox>
+                                <FlexBox
+                                    direction="Column"
+                                    id="flexGISMap"
+                                    visible="false"
+                                >
+                                    <form:SimpleForm
+                                        id="idEsriAddr"
+                                        editable="true"
+                                        layout="ResponsiveGridLayout"
+                                        labelSpanXL="3"
+                                        labelSpanL="2"
+                                        labelSpanM="4"
+                                        labelSpanS="4"
+                                        emptySpanXL="1"
+                                        emptySpanL="1"
+                                        emptySpanM="1"
+                                        emptySpanS="0"
+                                        columnsXL="1"
+                                        columnsL="1"
+                                        columnsM="1"
+                                        singleContainerFullSize="false"
+                                    >
+                                        <form:content>
+                                            <Label text="" />
+                                            <Label text="" />
+                                            <Label text="" />
+                                            <Button
+                                                icon="sap-icon://search"
+                                                text="Search"
+                                                type="Emphasized"
+                                                press="onGISMap"
+                                                width="35%"
+                                            />
+                                        </form:content>
+                                    </form:SimpleForm>
+                                    <MessageStrip
+                                        id="idEsriMess"
+                                        text="{i18n>txtMapSearch}"
+                                        type="Success"
+                                        showIcon="true"
+                                        class="sapUiMediumMarginBottom"
+                                    />
+                                    <html:iframe
+                                        target='_top'
+                                        src="/sap/bc/ui5_ui5/sap/zeh_openburning/map.html"
+                                        id="attachmentframe"
+                                        height="500"
+                                        width="100%"
+                                    />
+                                </FlexBox>
+                                <table:Table
+                                    selectionMode="Single"
+                                    id="zoneidErfTable"
+                                    visible="false"
+                                    rows="{erfModel>/results}"
+                                    rowSelectionChange=".onRowSelectionChange"
+                                >
+                                    <table:extension>
+                                        <Toolbar>
+                                            <ToolbarSeparator />
+                                            <SearchField
+                                                width="20%"
+                                                search=".onSearchField"
+                                            />
+                                        </Toolbar>
+                                    </table:extension>
+                                    <table:columns>
+                                        <!--Start of columns -->
+                                        <table:Column>
+                                            <Label text="Select" />
+                                            <table:template>
+                                                <RadioButton
+                                                    selected="{erfModel>SELECTED}"
+                                                    select=".onRadioButtonSelect"
+                                                />
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column
+                                            sortProperty="ERFNO"
+                                            filterProperty="ERFNO"
+                                        >
+                                            <Label text="ERF Number" />
+                                            <table:template>
+                                                <Label
+                                                    text="{erfModel>ERFNO}"
+                                                />
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column
+                                            sortProperty="ALLOTMENT"
+                                            filterProperty="ALLOTMENT"
+                                        >
+                                            <Label text="Allotment" />
+                                            <table:template>
+                                                <Label
+                                                    text="{erfModel>ALLOTMENT}"
+                                                />
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column
+                                            sortProperty="DISTRICT"
+                                            filterProperty="DISTRICT"
+                                        >
+                                            <Label text="District" />
+                                            <table:template>
+                                                <Label
+                                                    text="{erfModel>DISTRICT}"
+                                                />
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column
+                                            sortProperty="ADDRESS"
+                                            filterProperty="ADDRESS"
+                                        >
+                                            <Label text="Street Address" />
+                                            <table:template>
+                                                <Label
+                                                    text="{erfModel>ADDRESS}"
+                                                />
+                                                <!--<Label text="{ path: 'CurrentHour', type: 'sap.ui.model.odata.type.Time', formatOptions: { UTC: true } }"/>-->
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column
+                                            sortProperty="CITY"
+                                            filterProperty="CITY"
+                                        >
+                                            <Label text="City" />
+                                            <table:template>
+                                                <Label text="{erfModel>CITY}" />
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column
+                                            sortProperty="REGION"
+                                            filterProperty="REGION"
+                                        >
+                                            <Label text="Region" />
+                                            <table:template>
+                                                <Label
+                                                    text="{erfModel>REGION}"
+                                                />
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column
+                                            sortProperty="POSTL_CODE"
+                                            filterProperty="POSTL_CODE"
+                                        >
+                                            <Label text="Postal Code" />
+                                            <table:template>
+                                                <Label
+                                                    text="{erfModel>POSTL_CODE}"
+                                                />
+                                            </table:template>
+                                        </table:Column>
+                                        <table:Column
+                                            sortProperty="PLNO"
+                                            filterProperty="PLNO"
+                                        >
+                                            <Label text="Parcel Number" />
+                                            <table:template>
+                                                <Label text="{erfModel>PLNO}" />
+                                            </table:template>
+                                        </table:Column>
+                                        <!--End of columns -->
+                                    </table:columns>
+                                </table:Table>
+                            </WizardStep>
+                            <WizardStep
+							id="stepAppPolyGon"
+                                title="GIS"
+                                subsequentSteps="stepAppDetails"
+                                icon="sap-icon://font-awesome/circle">
+							<core:Fragment fragmentName="capetown.gov.za_ZPN_OPEN_BURNING.fragments.gisPolygon"
+								type="XML" />
+							</WizardStep>
+                            <WizardStep
+                                id="stepAppDetails"
+                                title="Parties Involved"
+                                subsequentSteps="stepAppBurningType"
+                                icon="sap-icon://font-awesome/circle"
+                            >
+                                <VBox class="sapUiSmallMargin">
+                                    <form:SimpleForm
+                                        id="frmChooseOwner"
+                                        editable="false"
+                                        layout="ResponsiveGridLayout"
+                                        labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="12"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="1"
+                                        columnsL="1"
+                                        columnsM="1"
+                                        singleContainerFullSize="true"
+                                    >
+                                        <form:content>
+                                            <!--<l:VerticalLayout alignItems="Center" width="100%">-->
+                                            <core:Title
+                                                text="{i18n>txtOwner}"
+                                            />
+                                            <ComboBox
+                                                id="cboPartySelect"
+                                                items="{path: 'oModelParty>/results', sorter: { path: 'PARTNER' }}"
+                                                change="onPartySearch"
+                                            >
+                                                <core:ListItem
+                                                    key="{oModelParty>PARTNER}"
+                                                    text="{oModelParty>NAME}"
+                                                />
+                                            </ComboBox>
+                                        </form:content>
+                                    </form:SimpleForm>
+                                    <form:SimpleForm
+                                        id="frmAppDetails"
+                                        editable="false"
+                                        layout="ResponsiveGridLayout"
+                                        labelSpanXL="1"
+                                        labelSpanL="2"
+                                        labelSpanM="4"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="2"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false"
+                                    >
+                                        <form:content>
+                                            <core:Title text="" />
+                                            <FlexBox direction="Column">
+                                                <Label text="Name of Owner" />
+                                                <!-- <Label text=""/> -->
+                                                <Input
+                                                    id="inName"
+                                                    value="{oModelOwner>/OwnerName}"
+                                                    visible="true"
+                                                    enabled="false"
+                                                    required="false"
+                                                    width="100%"
+                                                />
+                                                <Label
+                                                    text="Cellphone number"
+                                                    class="myCustomMargin"
+                                                />
+                                                <!-- <Label text=""/> -->
+                                                <Input
+                                                    id="inCell"
+                                                    value="{oModelOwner>/Cellphone}"
+                                                    visible="true"
+                                                    enabled="false"
+                                                    required="false"
+                                                    width="100%"
+                                                />
+                                                <Label
+                                                    text="Email address"
+                                                    class="myCustomMargin"
+                                                />
+                                                <!-- <Label text=""/> -->
+                                                <Input
+                                                    id="inEmail"
+                                                    value="{oModelOwner>/Email}"
+                                                    visible="true"
+                                                    enabled="false"
+                                                    required="true"
+                                                    width="100%"
+                                                />
+                                            </FlexBox>
+                                            <core:Title text="" />
+                                            <!-- <FlexBox direction="Column"> -->
+                                            <Label text="Address" />
+                                            <!-- <Label text=""/> -->
+                                            <Input
+                                                id="inAddress"
+                                                value="{oModelOwner>/Address}"
+                                                visible="true"
+                                                enabled="false"
+                                                required="true"
+                                                width="100%"
+                                            />
+                                            <Label
+                                                text="Telephone number"
+                                                class="myCustomMargin"
+                                            />
+                                            <!-- <Label text=""/> -->
+                                            <Input
+                                                id="inTel"
+                                                value="{oModelOwner>/Telephone}"
+                                                visible="true"
+                                                enabled="false"
+                                                required="true"
+                                                width="100%"
+                                            />
+                                            <!-- </FlexBox> -->
+                                            <core:Title
+                                                text="Provide alternate contact details if available:"
+                                            />
+                                            <FlexBox direction="Column">
+                                                <Label
+                                                    text="Cellphone number"
+                                                />
+                                                <!-- <Label text=""/> -->
+                                                <Input
+                                                    id="inAltCell"
+                                                    value="{oModelOwner>/AlternateCell}"
+                                                    maxLength="10"
+                                                    type="Number"
+                                                    visible="true"
+                                                    required="true"
+                                                    width="60%"
+                                                />
+                                            </FlexBox>
+                                            <core:Title text="" />
+                                            <FlexBox direction="Column">
+                                                <Label text="Email address" />
+                                                <!-- <Label text=""/> -->
+                                                <Input
+                                                    id="inputAltEmail"
+                                                    value="{oModelOwner>/AlternateEmail}"
+                                                    maxLength="60"
+                                                    type="Email"
+                                                    liveChange="onEmailNumberChange"
+                                                    visible="true"
+                                                    required="true"
+                                                    width="60%"
+                                                />
+                                            </FlexBox>
+                                        </form:content>
+                                    </form:SimpleForm>
+                                    <form:SimpleForm
+                                        id="frmChoosePersRespon"
+                                        editable="false"
+                                        layout="ResponsiveGridLayout"
+                                        labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="12"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="1"
+                                        columnsL="1"
+                                        columnsM="1"
+                                        singleContainerFullSize="true"
+                                    >
+                                        <form:content>
+                                            <core:Title
+                                                text="Person Responsible for Payment"
+                                            />
+                                            <ComboBox
+                                                id="ChooseResponsComboBox"
+                                                placeholder="Select owner "
+                                                change="onPersonResponse"
+                                                width="80%"
+                                            >
+                                                <core:Item
+                                                    key="1"
+                                                    text="Owner"
+                                                />
+                                                <core:Item
+                                                    key="2"
+                                                    text="Applicant"
+                                                />
+                                                <core:Item
+                                                    key="3"
+                                                    text="3rd Party"
+                                                />
+                                            </ComboBox>
+                                            <!--</l:VerticalLayout>-->
+                                        </form:content>
+                                    </form:SimpleForm>
+                                    <form:SimpleForm
+                                        id="frmAppPersonResponsible"
+                                        editable="false"
+                                        layout="ResponsiveGridLayout"
+                                        labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="12"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="true"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="2"
+                                        columnsL="2"
+                                        columnsM="2"
+                                        singleContainerFullSize="false"
+                                        visible="false"
+                                    >
+                                        <form:content>
+                                            <core:Title
+                                                text="3rd Party Details"
+                                            />
+                                            <!-- <FlexBox direction="Column"> -->
+                                            <Label text="Search By" />
+                                            <ComboBox
+                                                id="cboThirdparty"
+                                                placeholder="Select"
+                                                change="onThirdParty"
+                                                width="80%"
+                                            >
+                                                <core:Item
+                                                    key="1"
+                                                    text="Business Partner "
+                                                />
+                                                <core:Item
+                                                    key="2"
+                                                    text="ID "
+                                                />
+                                                <core:Item
+                                                    key="3"
+                                                    text="Passport "
+                                                />
+                                            </ComboBox>
+                                            <!-- <Label text=""/> -->
+                                            <Label
+                                                text="{oModelThirdPartyDetails>/SearchBy} Number"
+                                                class="myCustomMargin"
+                                            />
+                                            <!-- <Label text=""/> -->
+                                            <Input
+                                                id="inputBusinessNumber"
+                                                value=""
+                                                visible="true"
+                                                required="true"
+                                                width="60%"
+                                            />
+                                            <!-- <Label text=""/> -->
+                                            <l:VerticalLayout>
+                                                <Button
+                                                    text="Search"
+                                                    press=".onSearchThird"
+                                                    icon="sap-icon://search"
+                                                    type="Emphasized"
+                                                    width="100px"
+                                                />
+                                            </l:VerticalLayout>
+                                            <!-- </FlexBox> -->
+                                            <core:Title text="" />
+
+                                            <!-- <FlexBox direction="Column"> -->
+                                            <Label text="Name of Payer" />
+                                            <!-- <Label text=""/> -->
+                                            <Input
+                                                id="inputNameAppl"
+                                                value=""
+                                                visible="true"
+                                                enabled="false"
+                                                required="true"
+                                                width="60%"
+                                            />
+                                            <Label
+                                                text="Cell Phone Number"
+                                                class="myCustomMargin"
+                                            />
+                                            <!-- <Label text=""/> -->
+                                            <Input
+                                                id="inputCellAppl"
+                                                value=""
+                                                visible="true"
+                                                enabled="false"
+                                                required="true"
+                                                width="60%"
+                                            />
+                                            <Label
+                                                text="E-mail Address"
+                                                class="myCustomMargin"
+                                            />
+                                            <!-- <Label text=""/> -->
+                                            <Input
+                                                id="inputEmailAppl"
+                                                value=""
+                                                visible="true"
+                                                enabled="false"
+                                                required="true"
+                                                width="60%"
+                                            />
+                                            <!-- </FlexBox> -->
+                                            <core:Title text="" />
+                                            <!-- <FlexBox direction="Column"> -->
+                                            <Label text="Address" />
+                                            <!-- <Label text=""/> -->
+                                            <Input
+                                                id="inputAddressAppl"
+                                                value=""
+                                                visible="true"
+                                                enabled="false"
+                                                required="true"
+                                                width="60%"
+                                            />
+                                            <Label
+                                                text="Telephone number"
+                                                class="myCustomMargin"
+                                            />
+                                            <!-- <Label text=""/> -->
+                                            <Input
+                                                id="inputTelAppl"
+                                                value=""
+                                                visible="true"
+                                                enabled="false"
+                                                required="true"
+                                                width="60%"
+                                            />
+                                            <!-- </FlexBox> -->
+                                            <core:Title
+                                                text="Confirm contact details"
+                                            />
+                                            <!-- <FlexBox direction="Column"> -->
+                                            <Label text="Cell Phone Number" />
+                                            <!-- <Label text=""/> -->
+                                            <Input
+                                                id="inputAltCellAppl"
+                                                maxLength="10"
+                                                type="Number"
+                                                visible="true"
+                                                required="true"
+                                                width="60%"
+                                            />
+                                            <!-- </FlexBox> -->
+                                            <core:Title text="" />
+                                            <!-- <FlexBox direction="Column"> -->
+                                            <Label text="E-mail Address" />
+                                            <!-- <Label text=""/> -->
+                                            <Input
+                                                id="inputAltEmailAppl"
+                                                liveChange="onEmailNumberChange"
+                                                type="Email"
+                                                visible="true"
+                                                required="true"
+                                                width="60%"
+                                            />
+                                            <!-- </FlexBox> -->
+                                        </form:content>
+                                    </form:SimpleForm>
+                                </VBox>
+                            </WizardStep>
+                            <WizardStep
+                                id="stepAppBurningType"
+                                title="Burning Details"
+                                subsequentSteps="stepAppFireService"
+                                icon="sap-icon://font-awesome/circle"
+                            >
+                                <VBox class="sapUiSmallMargin">
+                                    <form:SimpleForm
+                                        id="frmAppBurningType"
+                                        labelSpanXL="4"
+                                        layout="ResponsiveGridLayout"
+                                        labelSpanL="4"
+                                        labelSpanM="12"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="4"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="1"
+                                        columnsL="1"
+                                        columnsM="1"
+                                    >
+                                        <form:content>
+                                            <!-- <core:Title text="" /> -->
+                                            <!-- <FlexBox direction="Column"> -->
+                                            <!-- <Text text="Provide the square meterage (m&#178;) of the biomass being burnt" id="txtSizeArea"/> -->
+                                            <Label
+                                                text="Provide the meterage of biomass being burned (m&#178; for area burns, m3 for stack burns) )"
+                                            />
+                                            <Input
+                                                id="inputAreaSize"
+                                                value="{oModelBurningDetailsStep>/squareMeterage}"
+                                                type="Number"
+                                            />
+                                            <Label
+                                                text="{i18n>supplyDescription} "
+                                            />
+                                            <Input
+                                                id="inputFullDescrip"
+                                                value="{oModelBurningDetailsStep>/fullDescription}"
+                                            />
+                                            <Label
+                                                text="Location of open burning "
+                                            />
+                                            <Input
+                                                id="inputLocationOpen"
+                                                value="{oModelBurningDetailsStep>/location}"
+                                            />
+                                            <Label
+                                                text="{i18n>materialOriginate}"
+                                                class="myCustomMargin"
+                                            />
+                                            <RadioButtonGroup
+                                                id="GroupMaterial"
+                                                select="radioButtonSupply"
+                                            >
+                                                <RadioButton text="Yes" />
+                                                <RadioButton text="No" />
+                                            </RadioButtonGroup>
+                                            <Label
+                                                text="{i18n>alternateInvestigation}"
+                                                class="myCustomMargin"
+                                            />
+                                            <TextArea
+                                                id="txtAreaInvestigation"
+                                                value="{oModelBurningDetailsStep>/investigationReducing}"
+                                                placeholder="Enter text"
+                                                change="handleChangeDetails"
+                                                rows="4"
+                                                ariaLabelledBy="TextAreaLabel"
+                                            />
+                                            <Label
+                                                text="{i18n>propertyNotified}"
+                                                class="myCustomMargin"
+                                            />
+                                            <RadioButtonGroup
+                                                id="GroupPNotified"
+                                                select="radioButtonPNotified"
+                                            >
+                                                <RadioButton text="Yes" />
+                                                <RadioButton text="No" />
+                                            </RadioButtonGroup>
+                                            <!--<TextArea id="txtAreaPropertyNotified" value="{oModelBurningDetailsStep>/adjPropertyNotified}" placeholder="Enter text"-->
+                                            <!--	change="handleChangeDetails" rows="4" ariaLabelledBy="TextAreaLabel" width="100%"/>-->
+                                            <!-- </FlexBox> -->
+                                            <!-- <core:Title text=""/> -->
+                                            <!-- <FlexBox direction="Column"> -->
+                                            <!-- </form:content>
+									</form:SimpleForm>
+											<form:SimpleForm id="frmAppBurningType2" labelSpanXL="4" layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1">
+										<form:content> -->
+                                            <!-- <core:Title text="" /> -->
+                                            <Label
+                                                text="Estimated cost of the open burning operation (ZAR) (only numeric)"
+                                            />
+                                            <Input
+                                                id="inputEstmatedCost"
+                                                type="Number"
+                                                value="{oModelBurningDetailsStep>/estimatedCost}"
+                                            />
+                                            <Label
+                                                text="Time period of burn in days (day or part thereof) "
+                                            />
+                                            <Input
+                                                id="inputTimePeriod"
+                                                value="{oModelBurningDetailsStep>/timePeriod}"
+                                            />
+                                            <Label
+                                                text="Detail every alternative investigation, including cost for the disposal of material to be open burned."
+                                            />
+                                            <TextArea
+                                                id="txtAreaDetailAlt"
+                                                value="{oModelBurningDetailsStep>/alternativeInvestigation}"
+                                                placeholder="Enter text"
+                                                change="handleChangeDetails"
+                                                rows="4"
+                                                ariaLabelledBy="TextAreaLabel"
+                                            />
+                                            <Label
+                                                text="Is the proposed burn site at least 100m away from any building or structures?"
+                                                class="myCustomMargin"
+                                            />
+                                            <RadioButtonGroup
+                                                id="GroupProp"
+                                                select="onProposedSite"
+                                            >
+                                                <RadioButton text="Yes" />
+                                                <RadioButton text="No" />
+                                            </RadioButtonGroup>
+                                            <Label
+                                                text="{i18n>burningPose}"
+                                                class="myCustomMargin"
+                                            />
+                                            <RadioButtonGroup
+                                                id="GroupOpenBurn"
+                                                select="onBurningPose"
+                                            >
+                                                <RadioButton text="Yes" />
+                                                <RadioButton text="No" />
+                                            </RadioButtonGroup>
+                                            <Label
+                                                text="{i18n>listExpand}"
+                                                class="myCustomMargin"
+                                            />
+                                            <TextArea
+                                                id="txtListExpand"
+                                                value="{oModelBurningDetailsStep>/listExpand}"
+                                                placeholder="Enter text"
+                                                change="handleChangeDetails"
+                                                rows="4"
+                                                ariaLabelledBy="TextAreaLabel"
+                                                width="100%"
+                                            />
+                                            <!-- </FlexBox> -->
+                                        </form:content>
+                                    </form:SimpleForm>
+                                </VBox>
+                            </WizardStep>
+                            <WizardStep
+                                id="stepAppFireService"
+                                subsequentSteps="stepAppDocuments"
+                                title="Fire Service"
+                                icon="sap-icon://font-awesome/circle"
+                            >
+                                <VBox class="sapUiSmallMargin">
+                                    <form:SimpleForm
+                                        id="frmAppFireService"
+                                        labelSpanXL="4"
+                                        layout="ResponsiveGridLayout"
+                                        labelSpanL="4"
+                                        labelSpanM="12"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="4"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="1"
+                                        columnsL="1"
+                                        columnsM="1"
+                                    >
+                                        <form:content>
+                                            <!-- <core:Title text=""/> -->
+                                            <!-- <VBox> -->
+                                            <!-- <FlexBox direction="Column"> -->
+                                            <Label
+                                                text="Specify the water source to be utilised for firefighting."
+                                            />
+                                            <RadioButtonGroup
+                                                id="rdoWaterSourceGroup"
+                                                columns="1"
+                                                width="100%"
+                                                class="sapUiMediumMarginBottom"
+                                                select="onWaterSource"
+                                            >
+                                                <RadioButton
+                                                    id="rdoPortable"
+                                                    text="Potable"
+                                                />
+                                                <RadioButton
+                                                    id="rdoNonPotable"
+                                                    text="Non-potable"
+                                                />
+                                                <RadioButton
+                                                    id="rdoTreatedEfluent"
+                                                    text="Treated effluent"
+                                                />
+                                                <RadioButton
+                                                    id="rdoSpecifyOther"
+                                                    text="Other"
+                                                />
+                                            </RadioButtonGroup>
+                                            <!-- <Label text=""/> -->
+                                            <TextArea
+                                                width="60%"
+                                                id="TextAreaWaterSource"
+                                                value="{oModelFireService>/Other}"
+                                                placeholder="Enter text"
+                                                change="handleChange"
+                                                rows="4"
+                                                ariaLabelledBy="TextAreaLabel"
+                                                visible="false"
+                                                class="myCustomMargin"
+                                            />
+                                            <!-- </FlexBox> -->
+                                            <!-- <FlexBox direction="Column"> -->
+                                            <Label
+                                                text="Is the land on which the proposed burning of combustible material will take place, state land, a farm, small holding or land within a proclaimed township not used for residential purposes?."
+                                                class="myCustomMargin"
+                                            />
+                                            <RadioButtonGroup
+                                                id="GroupProposed"
+                                                select="onBurnLandOwnershipInfor"
+                                            >
+                                                <RadioButton text="Yes" />
+                                                <RadioButton text="No" />
+                                            </RadioButtonGroup>
+                                            <!-- </FlexBox> -->
+                                            <!-- <FlexBox direction="Column"> -->
+                                            <Label
+                                                text="Describe the firefighting and/or resource measures that will be put in place during the proposed open burn."
+                                                class="myCustomMargin"
+                                            />
+                                            <TextArea
+                                                width="100%"
+                                                id="TextAreaFireFighting"
+                                                placeholder="Enter text"
+                                                value="{oModelFireService>/SafeMaterial}"
+                                                change="handleChange"
+                                                rows="4"
+                                                ariaLabelledBy="TextAreaLabel"
+                                            />
+                                            <!-- </FlexBox> -->
+                                            <!-- </VBox> -->
+                                            <!-- <core:Title text=""/> -->
+                                            <!-- <VBox> -->
+                                            <!-- <FlexBox direction="Column"> -->
+                                            <Label
+                                                text="Is the area adjacent to the proposed combustible material free of material which is likely to spread the fire?"
+                                            />
+                                            <RadioButtonGroup
+                                                id="GroupAdjacentProposed"
+                                                select="onCombustibleMaterial"
+                                            >
+                                                <RadioButton text="Yes" />
+                                                <RadioButton text="No" />
+                                            </RadioButtonGroup>
+                                            <Label
+                                                text="For stack/fuel reduction burning, are stacks of such a size that should a sudden wind arise the fire can be easily doused using equipment on site?"
+                                                class="myCustomMargin"
+                                            />
+                                            <RadioButtonGroup
+                                                id="GroupStack"
+                                                select="onSafeStack"
+                                            >
+                                                <RadioButton text="Yes" />
+                                                <RadioButton text="No" />
+                                            </RadioButtonGroup>
+                                            <!-- </FlexBox> -->
+                                            <!-- </VBox> -->
+                                        </form:content>
+                                    </form:SimpleForm>
+                                </VBox>
+                            </WizardStep>
+                            <WizardStep
+                                id="stepAppDocuments"
+                                title="Attachments"
+                                subsequentSteps="stepAppReview"
+                                icon="sap-icon://font-awesome/circle"
+                            >
+                                <VBox class="sapUiSmallMargin">
+                                    <form:SimpleForm
+                                        id="frmAppDocuments"
+                                        editable="false"
+                                        layout="ResponsiveGridLayout"
+                                        labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="12"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="1"
+                                        columnsL="1"
+                                        columnsM="1"
+                                        singleContainerFullSize="false"
+                                    >
+                                        <form:content>
+                                            <core:Title text="" />
+                                            <l:VerticalLayout width="100%">
+                                                <l:content>
+                                                    <!-- <Text text="{i18n>pleaseAttach}"/> -->
+                                                    <MessageStrip
+                                                        text="{i18n>pleaseAttach}"
+                                                        type="Information"
+                                                        showIcon="true"
+                                                        class="sapUiMediumMarginBottom"
+                                                    />
+                                                    <MessageStrip
+                                                        text="{i18n>ownerOccupiers}"
+                                                        type="Information"
+                                                        showIcon="true"
+                                                        class="sapUiMediumMarginBottom"
+                                                    />
+                                                    <Label text="" />
+                                                    <FlexBox
+                                                        direction="Column"
+                                                        class="myCustomMargin"
+                                                    >
+                                                        <!-- <Text text="{i18n>ownerOccupiers} "/> -->
+                                                        <!--<Label text="" class="myCustomMargin"/>-->
+                                                        <!--<TextArea id="txtAreaOwnerOccupiers" placeholder="Enter text" change="handleChange" rows="4" ariaLabelledBy="TextAreaLabel" width="100%"/>-->
+                                                    </FlexBox>
+                                                    <OverflowToolbar>
+                                                        <ToolbarSpacer />
+                                                        <u:FileUploader
+                                                            class="sapUiTinyMarginBegin"
+                                                            id="FileUploaderid"
+                                                            placeholder="Choose a file"
+                                                            name="myFileUpload"
+                                                            change="onFileUploadChange"
+                                                        />
+                                                    </OverflowToolbar>
+                                                    <Table
+                                                        showNoData="true"
+                                                        id="Tableid"
+                                                        items="{pdfModel>/pdfData}"
+                                                    >
+                                                        <columns>
+                                                            <Column>
+                                                                <Text
+                                                                    text="Document ID"
+                                                                    class="myHeading"
+                                                                />
+                                                            </Column>
+                                                            <Column>
+                                                                <Text
+                                                                    text="Document Name"
+                                                                    class="myHeading"
+                                                                />
+                                                            </Column>
+                                                            <Column>
+                                                                <Text
+                                                                    text="Document Size"
+                                                                    class="myHeading"
+                                                                />
+                                                            </Column>
+                                                            <Column>
+                                                                <Text
+                                                                    text="Upload Date"
+                                                                    class="myHeading"
+                                                                />
+                                                            </Column>
+                                                            <Column>
+                                                                <Text
+                                                                    text="Uploaded Document"
+                                                                    class="myHeading"
+                                                                />
+                                                            </Column>
+                                                            <Column>
+                                                                <Text text="" />
+                                                            </Column>
+                                                            <Column>
+                                                                <Text text="" />
+                                                            </Column>
+                                                            <Column>
+                                                                <Text text="" />
+                                                            </Column>
+                                                        </columns>
+                                                        <items>
+                                                            <ColumnListItem>
+                                                                <cells>
+                                                                    <Text
+                                                                        text="{pdfModel>id}"
+                                                                    />
+                                                                    <Text
+                                                                        text="{pdfModel>name}"
+                                                                    />
+                                                                    <Text
+                                                                        text="{pdfModel>size}"
+                                                                    />
+                                                                    <Text
+                                                                        text="{pdfModel>date}"
+                                                                    />
+                                                                    <ComboBox
+                                                                        showSecondaryValues="true"
+                                                                        valueStateText="Error message. All the files with [ * ] are mandatory"
+                                                                        items="{path: 'checklist>/results', sorter: { path: 'Optionality' }, templateShareable: false }"
+                                                                        change="onSelectedCheckList"
+                                                                    >
+                                                                        <core:ListItem
+                                                                            key="{checklist>Anchor}"
+                                                                            text="{checklist>Description}"
+                                                                        />
+                                                                    </ComboBox>
+                                                                    <Button
+                                                                        icon="sap-icon://delete"
+                                                                        type="Reject"
+                                                                        tooltip="Remove Document"
+                                                                        press="onDeleteFilePress"
+                                                                    />
+                                                                    <Button
+                                                                        icon="sap-icon://sys-enter-2"
+                                                                        type="Accept"
+                                                                        tooltip="Uploaded"
+                                                                        visible="{= ${pdfModel>isUploaded} }"
+                                                                    />
+                                                                    <Button
+                                                                        icon="sap-icon://upload-to-cloud"
+                                                                        text="Upload File"
+                                                                        press="onUploadHandle"
+                                                                    />
+                                                                </cells>
+                                                            </ColumnListItem>
+                                                        </items>
+                                                    </Table>
+                                                </l:content>
+                                            </l:VerticalLayout>
+                                        </form:content>
+                                    </form:SimpleForm>
+                                </VBox>
+                            </WizardStep>
+                            <WizardStep
+                                id="stepAppReview"
+                                title="Review"
+                                icon="sap-icon://font-awesome/circle"
+                            >
+                                <VBox class="sapUiSmallMargin">
+                                    <form:SimpleForm
+                                        id="frmPartiesInvolvedOwnerReviewView"
+                                        title="Parties Involved"
+                                        editable="false"
+                                        layout="ResponsiveGridLayout"
+                                        labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="12"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="1"
+                                        columnsL="1"
+                                        columnsM="1"
+                                        singleContainerFullSize="false"
+                                        visible="{= !${oModelOwner>/isEditing}}"
+                                    >
+                                        <form:content>
+                                            <Text
+                                                id="txtOwner"
+                                                text="Owner"
+                                            />
+                                            <Label text="Name" />
+                                            <Text
+                                                text="{oModelOwner>/OwnerName}"
+                                            />
+                                            <Label text="Address." />
+                                            <Text
+                                                text="{oModelOwner>/Address}"
+                                            />
+                                            <Label text="Cellphone" />
+                                            <Text
+                                                text="{oModelOwner>/Cellphone}"
+                                            />
+                                            <Label text="Telephone" />
+                                            <Text
+                                                text="{oModelOwner>/Telephone}"
+                                            />
+                                            <Label text="Email" />
+                                            <Text text="{oModelOwner>/Email}" />
+                                            <Label text="Owner of Premises" />
+                                            <Text
+                                                text="{oModelOwner>/OwnerPremises}"
+                                            />
+                                            <core:Title
+                                                text="Provide alternate contact details if available"
+                                            />
+                                            <Label text="Cellphone number" />
+                                            <Text
+                                                text="{oModelOwner>/AlternateCell}"
+                                            />
+                                            <Label text="Email" />
+                                            <Text
+                                                text="{oModelOwner>/AlternateEmail}"
+                                            />
+                                            <Label text="" />
+                                            <FlexBox
+                                                alignItems="Start"
+                                                justifyContent="Start"
+                                                id="flexPartiesReview"
+                                            >
+                                                <Button
+                                                    text="Save"
+                                                    press=".onSavePartiesInvolved"
+                                                    icon="sap-icon://save"
+                                                    type="Emphasized"
+                                                    width="100px"
+                                                    class="sapUiSmallMarginEnd"
+                                                />
+                                                <Button
+                                                    text="Edit"
+                                                    press=".onEditParties"
+                                                    icon="sap-icon://edit"
+                                                    type="Emphasized"
+                                                    width="100px"
+                                                    class="sapUiSmallMarginEnd"
+                                                />
+                                            </FlexBox>
+                                        </form:content>
+                                    </form:SimpleForm>
+                                    <form:SimpleForm
+                                        id="frmPartiesInvolvedOwnerEdit"
+                                        title="Parties Involved"
+                                        editable="false"
+                                        layout="ResponsiveGridLayout"
+                                        labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="12"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="1"
+                                        columnsL="1"
+                                        columnsM="1"
+                                        singleContainerFullSize="false"
+                                        visible="{= ${oModelOwner>/isEditing}}"
+                                    >
+                                        <form:content>
+                                            <Text
+                                                id="txtOwnerEdit"
+                                                text="Owner"
+                                            />
+                                            <Label text="Name" />
+                                            <Input
+                                                value="{oModelOwner>/OwnerName}"
+                                            />
+                                            <Label text="Address." />
+                                            <Input
+                                                value="{oModelOwner>/Address}"
+                                            />
+                                            <Label text="Cellphone" />
+                                            <Input
+                                                value="{oModelOwner>/Cellphone}"
+                                            />
+                                            <Label text="Telephone" />
+                                            <Input
+                                                value="{oModelOwner>/Telephone}"
+                                            />
+                                            <Label text="Email" />
+                                            <Input
+                                                value="{oModelOwner>/Email}"
+                                            />
+                                            <Label text="Owner of Premises" />
+                                            <Input
+                                                value="{oModelOwner>/OwnerPremises}"
+                                            />
+                                            <core:Title
+                                                text="Provide alternate contact details if available"
+                                            />
+                                            <Label text="Cellphone number" />
+                                            <Input
+                                                value="{oModelOwner>/AlternateCell}"
+                                            />
+                                            <Label text="Email" />
+                                            <Input
+                                                value="{oModelOwner>/AlternateEmail}"
+                                            />
+                                            <Label text="" />
+                                            <FlexBox
+                                                alignItems="Start"
+                                                justifyContent="Start"
+                                                id="flexPartiesEdit"
+                                            >
+                                                <Button
+                                                    text="Save"
+                                                    press=".onSavePartiesInvolved"
+                                                    icon="sap-icon://save"
+                                                    type="Emphasized"
+                                                    width="100px"
+                                                    class="sapUiSmallMarginEnd"
+                                                />
+                                                <Button
+                                                    text="Edit"
+                                                    press=".onEditParties"
+                                                    icon="sap-icon://edit"
+                                                    type="Emphasized"
+                                                    width="100px"
+                                                    class="sapUiSmallMarginEnd"
+                                                />
+                                            </FlexBox>
+                                        </form:content>
+                                    </form:SimpleForm>
+                                    <form:SimpleForm
+                                        id="frmPersonResponsibleView"
+                                        title="Person Responsible"
+                                        editable="false"
+                                        layout="ResponsiveGridLayout"
+                                        labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="12"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="1"
+                                        columnsL="1"
+                                        columnsM="1"
+                                        singleContainerFullSize="false"
+                                        visible="{= !${oModelPersonResponsible>/isEditing}}"
+                                    >
+                                        <form:content>
+                                            <core:Title
+                                                text="Person Responsible for Payment"
+                                            />
+                                            <Label text="Name" />
+                                            <Text
+                                                text="{oModelPersonResponsible>/Name}"
+                                            />
+                                            <Label text="Address." />
+                                            <Text
+                                                text="{oModelPersonResponsible>/Address}"
+                                            />
+                                            <Label text="Cellphone" />
+                                            <Text
+                                                text="{oModelPersonResponsible>/Cellphone}"
+                                            />
+                                            <Label text="Telephone" />
+                                            <Text
+                                                text="{oModelPersonResponsible>/Telephone}"
+                                            />
+                                            <Label text="Email" />
+                                            <Text
+                                                text="{oModelPersonResponsible>/Email}"
+                                            />
+                                            <Label text="" />
+                                            <FlexBox
+                                                alignItems="Start"
+                                                justifyContent="Start"
+                                                id="flexPersonResponsibleReview"
+                                            >
+                                                <Button
+                                                    text="Save"
+                                                    press=".onSavePersonResponsible"
+                                                    icon="sap-icon://save"
+                                                    type="Emphasized"
+                                                    width="100px"
+                                                    class="sapUiSmallMarginEnd"
+                                                />
+                                                <Button
+                                                    text="Edit"
+                                                    press=".onEditPersonResponsible"
+                                                    icon="sap-icon://edit"
+                                                    type="Emphasized"
+                                                    width="100px"
+                                                    class="sapUiSmallMarginEnd"
+                                                />
+                                            </FlexBox>
+                                        </form:content>
+                                    </form:SimpleForm>
+                                    <form:SimpleForm
+                                        id="frmPersonResponsibleEdit"
+                                        title="Person Responsible"
+                                        editable="false"
+                                        layout="ResponsiveGridLayout"
+                                        labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="12"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="1"
+                                        columnsL="1"
+                                        columnsM="1"
+                                        singleContainerFullSize="false"
+                                        visible="{= ${oModelPersonResponsible>/isEditing}}"
+                                    >
+                                        <form:content>
+                                            <Label text="Name" />
+                                            <Input
+                                                value="{oModelPersonResponsible>/Name}"
+                                            />
+                                            <Label text="Address." />
+                                            <Input
+                                                value="{oModelPersonResponsible>/Address}"
+                                            />
+                                            <Label text="Cellphone" />
+                                            <Input
+                                                value="{oModelPersonResponsible>/Cellphone}"
+                                            />
+                                            <Label text="Telephone" />
+                                            <Input
+                                                value="{oModelPersonResponsible>/Telephone}"
+                                            />
+                                            <Label text="Email" />
+                                            <Input
+                                                value="{oModelPersonResponsible>/Email}"
+                                            />
+                                            <Label text="" />
+                                            <FlexBox
+                                                alignItems="Start"
+                                                justifyContent="Start"
+                                                id="flexPersonResponsibleEdit"
+                                            >
+                                                <Button
+                                                    text="Save"
+                                                    press=".onSavePersonResponsible"
+                                                    icon="sap-icon://save"
+                                                    type="Emphasized"
+                                                    width="100px"
+                                                    class="sapUiSmallMarginEnd"
+                                                />
+                                                <Button
+                                                    text="Edit"
+                                                    press=".onEditPersonResponsible"
+                                                    icon="sap-icon://edit"
+                                                    type="Emphasized"
+                                                    width="100px"
+                                                    class="sapUiSmallMarginEnd"
+                                                />
+                                            </FlexBox>
+                                        </form:content>
+                                    </form:SimpleForm>
+                                    <form:SimpleForm
+                                        id="frmBurningTypeView"
+                                        title="Burning Type"
+                                        editable="false"
+                                        layout="ResponsiveGridLayout"
+                                        labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="12"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="1"
+                                        columnsL="1"
+                                        columnsM="1"
+                                        singleContainerFullSize="false"
+                                        visible="{= !${oModelBurnType>/isEditing}}"
+                                    >
+                                        <form:content>
+                                            <Label text="Burn Type" />
+                                            <Text
+                                                text="{oModelBurnType>/BurntypeString}"
+                                                class="boldText"
+                                            />
+                                            <Label text="" />
+                                            <FlexBox
+                                                alignItems="Start"
+                                                justifyContent="Start"
+                                                id="flexBurnTypeView"
+                                            >
+                                                <Button
+                                                    text="Save"
+                                                    press=".onSaveBurnType"
+                                                    icon="sap-icon://save"
+                                                    type="Emphasized"
+                                                    width="100px"
+                                                    class="sapUiSmallMarginEnd"
+                                                />
+                                                <Button
+                                                    text="Edit"
+                                                    press=".onEditBurnType"
+                                                    icon="sap-icon://edit"
+                                                    type="Emphasized"
+                                                    width="100px"
+                                                    class="sapUiSmallMarginEnd"
+                                                />
+                                            </FlexBox>
+                                        </form:content>
+                                    </form:SimpleForm>
+                                    <form:SimpleForm
+                                        id="frmBurningTypeEdit"
+                                        title="Burning Type"
+                                        editable="false"
+                                        layout="ResponsiveGridLayout"
+                                        labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="12"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="1"
+                                        columnsL="1"
+                                        columnsM="1"
+                                        singleContainerFullSize="false"
+                                        visible="{= ${oModelBurnType>/isEditing}}"
+                                    >
+                                        <form:content>
+                                            <Label text="Burn Type" />
+                                            <!--<FlexBox direction="Column">-->
+                                            <RadioButton
+                                                text="Prescribed | Ecological | Biodiversity burn"
+                                                select="oBurnTypeReview"
+                                            />
+                                            <Label text="" />
+                                            <RadioButton
+                                                text="Stack | Fuel reduction"
+                                                select="oBurnTypeReview"
+                                            />
+                                            <Label text="" />
+                                            <RadioButton
+                                                text="Agriculture"
+                                                select="oBurnTypeReview"
+                                            />
+                                            <Label text="" />
+                                            <RadioButton
+                                                text="Training process"
+                                                select="oBurnTypeReview"
+                                                id="rdoTrainingReview"
+                                            />
+                                            <Label text="" />
+                                            <RadioButton
+                                                text="Other"
+                                                id="otherReview"
+                                                select="oBurnTypeReview"
+                                            />
+                                            <Label text="" />
+                                            <FlexBox
+                                                alignItems="Start"
+                                                justifyContent="Start"
+                                                id="flexBurnTypeEdit"
+                                            >
+                                                <Button
+                                                    text="Save"
+                                                    press=".onSaveBurnType"
+                                                    icon="sap-icon://save"
+                                                    type="Emphasized"
+                                                    width="100px"
+                                                    class="sapUiSmallMarginEnd"
+                                                />
+                                                <Button
+                                                    text="Edit"
+                                                    press=".onEditBurnType"
+                                                    icon="sap-icon://edit"
+                                                    type="Emphasized"
+                                                    width="100px"
+                                                    class="sapUiSmallMarginEnd"
+                                                />
+                                            </FlexBox>
+                                            <!--</FlexBox >-->
+                                        </form:content>
+                                    </form:SimpleForm>
+                                    <!--<form:SimpleForm id="frmBurningDescriptionView" title="Burning Description" editable="false" layout="ResponsiveGridLayout" labelSpanXL="4"-->
+                                    <!--	labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"-->
+                                    <!--	columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false" visible="{= !${oModelBurnDescription>/isEditing}}">-->
+                                    <!--	<form:content>-->
+                                    <!--		<Label text="Description"/>-->
+                                    <!--		<Text text="{oModelBurnDescription>/BurnDescription}" class="boldText"/>-->
+                                    <!--		<Label text=""/>-->
+                                    <!--		<FlexBox alignItems="Start" justifyContent="Start" id="flexBurnDescriptionView">-->
+                                    <!--			<Button text="Save" press=".onSaveBurnDescription" icon="sap-icon://save" type="Emphasized" width="100px" class="sapUiSmallMarginEnd"/>-->
+                                    <!--			<Button text="Edit" press=".onEditBurnDescription" icon="sap-icon://edit" type="Emphasized" width="100px" class="sapUiSmallMarginEnd"/>-->
+                                    <!--		</FlexBox>-->
+                                    <!--	</form:content>-->
+                                    <!--</form:SimpleForm>-->
+                                    <form:SimpleForm
+                                        id="frmBurningDescriptionEdit"
+                                        title="Burning Description"
+                                        editable="false"
+                                        layout="ResponsiveGridLayout"
+                                        labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="12"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="1"
+                                        columnsL="1"
+                                        columnsM="1"
+                                        singleContainerFullSize="false"
+                                        visible="{= ${oModelBurnDescription>/isEditing}}"
+                                    >
+                                        <form:content>
+                                            <Text text="Description" />
+                                            <Label text="" />
+                                            <RadioButtonGroup
+                                                id="rbg1Burn"
+                                                columns="3"
+                                                width="100%"
+                                                class="sapUiMediumMarginBottom"
+                                            >
+                                                <RadioButton
+                                                    id="RB1-1Burn"
+                                                    text="Farm"
+                                                />
+                                                <RadioButton
+                                                    id="RB1-2Burn"
+                                                    text="Nature Conservation Area"
+                                                />
+                                                <RadioButton
+                                                    id="RB1-3Burn"
+                                                    text="Small Holding"
+                                                />
+                                                <RadioButton
+                                                    id="RB1-4Burn"
+                                                    text="Industrial Property"
+                                                />
+                                                <RadioButton
+                                                    id="RB1-5Burn"
+                                                    text="Commercial Property"
+                                                />
+                                                <RadioButton
+                                                    id="RB1-6Burn"
+                                                    text="Other"
+                                                />
+                                            </RadioButtonGroup>
+                                            <Label text="" />
+                                            <FlexBox
+                                                alignItems="Start"
+                                                justifyContent="Start"
+                                                id="flexBurnDescriptionEdit"
+                                            >
+                                                <Button
+                                                    text="Save"
+                                                    press=".onSaveBurnDescription"
+                                                    icon="sap-icon://save"
+                                                    type="Emphasized"
+                                                    width="100px"
+                                                    class="sapUiSmallMarginEnd"
+                                                />
+                                                <Button
+                                                    text="Edit"
+                                                    press=".onEditBurnDescription"
+                                                    icon="sap-icon://edit"
+                                                    type="Emphasized"
+                                                    width="100px"
+                                                    class="sapUiSmallMarginEnd"
+                                                />
+                                            </FlexBox>
+                                        </form:content>
+                                    </form:SimpleForm>
+                                    <form:SimpleForm
+                                        id="frmBurningDetailsView"
+                                        title="Burning Details"
+                                        editable="false"
+                                        layout="ResponsiveGridLayout"
+                                        labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="12"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="1"
+                                        columnsL="1"
+                                        columnsM="1"
+                                        singleContainerFullSize="false"
+                                        visible="{= !${oModelBurningDetailsStep>/isEditing}}"
+                                    >
+                                        <form:content>
+                                            <Label
+                                                text="Provide the square meterage (m&#178;) of the biomass being burnt"
+                                            />
+                                            <Text
+                                                text="{oModelBurningDetailsStep>/squareMeterage}"
+                                            />
+                                            <Label
+                                                text="{i18n>supplyDescription} "
+                                            />
+                                            <Text
+                                                text="{oModelBurningDetailsStep>/fullDescription}"
+                                            />
+                                            <Label
+                                                text="Location of open burning "
+                                            />
+                                            <Text
+                                                text="{oModelBurningDetailsStep>/location}"
+                                            />
+                                            <Label
+                                                text="{i18n>materialOriginate}"
+                                            />
+                                            <Text
+                                                text="{oModelBurningDetailsStep>/materialOriginate}"
+                                            />
+                                            <Label
+                                                text="{i18n>alternateInvestigation}"
+                                            />
+                                            <Text
+                                                text="{oModelBurningDetailsStep>/investigationReducing}"
+                                            />
+                                            <core:Title text="" />
+                                            <!--<FlexBox direction="Column">-->
+                                            <Label
+                                                text="Estimated cost of the open burning operation (ZAR) (only numeric)"
+                                            />
+                                            <Text
+                                                text="{oModelBurningDetailsStep>/estimatedCost}"
+                                            />
+                                            <Label
+                                                text="Time period of burn in days (day or part thereof) "
+                                            />
+                                            <Text
+                                                text="{oModelBurningDetailsStep>/timePeriod}"
+                                            />
+                                            <Label
+                                                text="Detail every alternative investigation, including cost for the disposal of material to be open burned."
+                                            />
+                                            <Text
+                                                text="{oModelBurningDetailsStep>/alternativeInvestigation}"
+                                            />
+                                            <Label
+                                                text="Is the proposed burn site at least 100m away from any building or structures?"
+                                                class="myCustomMargin"
+                                            />
+                                            <Text
+                                                text="{oModelBurningDetailsStep>/proposedBurn}"
+                                            />
+                                            <Label text="{i18n>burningPose}" />
+                                            <Text
+                                                text="{oModelBurningDetailsStep>/openBurning}"
+                                            />
+                                            <Label text="{i18n>listExpand}" />
+                                            <Text
+                                                text="{oModelBurningDetailsStep>/listExpand}"
+                                            />
+                                            <Label text="" />
+                                            <FlexBox
+                                                alignItems="Start"
+                                                justifyContent="Start"
+                                                id="flexBurnDetailsView"
+                                            >
+                                                <Button
+                                                    text="Save"
+                                                    press=".onSaveBurnDetails"
+                                                    icon="sap-icon://save"
+                                                    type="Emphasized"
+                                                    width="100px"
+                                                    class="sapUiSmallMarginEnd"
+                                                />
+                                                <Button
+                                                    text="Edit"
+                                                    press=".onEditBurnDetails"
+                                                    icon="sap-icon://edit"
+                                                    type="Emphasized"
+                                                    width="100px"
+                                                    class="sapUiSmallMarginEnd"
+                                                />
+                                            </FlexBox>
+                                            <!--</FlexBox>-->
+                                        </form:content>
+                                    </form:SimpleForm>
+                                    <form:SimpleForm
+                                        id="frmBurningDetailsEdit"
+                                        title="Burning Details"
+                                        editable="false"
+                                        layout="ResponsiveGridLayout"
+                                        labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="12"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="1"
+                                        columnsL="1"
+                                        columnsM="1"
+                                        singleContainerFullSize="false"
+                                        visible="{= ${oModelBurningDetailsStep>/isEditing}}"
+                                    >
+                                        <form:content>
+                                            <!--<FlexBox direction="Column">-->
+                                            <Label
+                                                text="Provide the square meterage (m&#178;) of the biomass being burnt"
+                                            />
+                                            <Input
+                                                value="{oModelBurningDetailsStep>/squareMeterage}"
+                                                width="60%"
+                                            />
+                                            <Label
+                                                text="{i18n>supplyDescription} "
+                                            />
+                                            <Input
+                                                value="{oModelBurningDetailsStep>/fullDescription}"
+                                                width="60%"
+                                            />
+                                            <Label
+                                                text="Location of open burning "
+                                            />
+                                            <Input
+                                                value="{oModelBurningDetailsStep>/location}"
+                                                width="60%"
+                                            />
+                                            <Label
+                                                text="{i18n>materialOriginate}"
+                                                class="myCustomMargin"
+                                            />
+                                            <RadioButtonGroup
+                                                select="radioButtonSupply"
+                                            >
+                                                <RadioButton text="Yes" />
+                                                <RadioButton text="No" />
+                                            </RadioButtonGroup>
+                                            <Label
+                                                text="{i18n>alternateInvestigation}"
+                                                class="myCustomMargin"
+                                            />
+                                            <TextArea
+                                                placeholder="Enter text"
+                                                change="handleChangeDetails"
+                                                rows="4"
+                                                value="{oModelBurningDetailsStep>/investigationReducing}"
+                                                ariaLabelledBy="TextAreaLabel"
+                                                width="100%"
+                                            />
+                                            <!--</FlexBox>-->
+                                            <core:Title text="" />
+                                            <!--<FlexBox direction="Column">-->
+                                            <Label
+                                                text="Estimated cost of the open burning operation (ZAR) (only numeric)"
+                                            />
+                                            <Input
+                                                type="Number"
+                                                value="{oModelBurningDetailsStep>/estimatedCost}"
+                                                width="60%"
+                                            />
+                                            <Label
+                                                text="Time period of burn in days (day or part thereof) "
+                                            />
+                                            <Input
+                                                value="{oModelBurningDetailsStep>/timePeriod}"
+                                                width="60%"
+                                            />
+                                            <Label
+                                                text="Detail every alternative investigation, including cost for the disposal of material to be open burned."
+                                            />
+                                            <TextArea
+                                                placeholder="Enter text"
+                                                change="handleChangeDetails"
+                                                value="{oModelBurningDetailsStep>/alternativeInvestigation}"
+                                                rows="4"
+                                                ariaLabelledBy="TextAreaLabel"
+                                                width="100%"
+                                            />
+                                            <Label
+                                                text="Is the proposed burn site at least 100m away from any building or structures?"
+                                                class="myCustomMargin"
+                                            />
+                                            <RadioButtonGroup>
+                                                <RadioButton text="Yes" />
+                                                <RadioButton text="No" />
+                                            </RadioButtonGroup>
+                                            <Label
+                                                text="{i18n>burningPose}"
+                                                class="myCustomMargin"
+                                            />
+                                            <RadioButtonGroup>
+                                                <RadioButton text="Yes" />
+                                                <RadioButton text="No" />
+                                            </RadioButtonGroup>
+                                            <Label
+                                                text="{i18n>listExpand}"
+                                                class="myCustomMargin"
+                                            />
+                                            <TextArea
+                                                placeholder="Enter text"
+                                                change="handleChangeDetails"
+                                                rows="4"
+                                                value="{oModelBurningDetailsStep>/listExpand}"
+                                                ariaLabelledBy="TextAreaLabel"
+                                                width="100%"
+                                            />
+                                            <!--</FlexBox>-->
+                                            <Label text="" />
+                                            <FlexBox
+                                                alignItems="Start"
+                                                justifyContent="Start"
+                                                id="flexBurnDetailsEdit"
+                                            >
+                                                <Button
+                                                    text="Save"
+                                                    press=".onSaveBurnDetails"
+                                                    icon="sap-icon://save"
+                                                    type="Emphasized"
+                                                    width="100px"
+                                                    class="sapUiSmallMarginEnd"
+                                                />
+                                                <Button
+                                                    text="Edit"
+                                                    press=".onEditBurnDetails"
+                                                    icon="sap-icon://edit"
+                                                    type="Emphasized"
+                                                    width="100px"
+                                                    class="sapUiSmallMarginEnd"
+                                                />
+                                            </FlexBox>
+                                        </form:content>
+                                    </form:SimpleForm>
+                                    <form:SimpleForm
+                                        id="frmFireServiceView"
+                                        title="Fire Service"
+                                        editable="false"
+                                        layout="ResponsiveGridLayout"
+                                        labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="12"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="1"
+                                        columnsL="1"
+                                        columnsM="1"
+                                        singleContainerFullSize="false"
+                                        visible="{= !${oModelFireService>/isEditing}}"
+                                    >
+                                        <form:content>
+                                            <Label
+                                                text="Specify the water source to be utilised for firefighting"
+                                            />
+                                            <Text
+                                                text="{oModelFireService>/WaterSource}"
+                                            />
+                                            <Label text="Other" />
+                                            <Text
+                                                text="{oModelFireService>/Other}"
+                                            />
+                                            <Label
+                                                text="Is the land on which the proposed burning of combustible material will take place, state land, a farm, small holding or land within a proclaimed township not used for residential purposes?."
+                                                class="myCustomMargin"
+                                            />
+                                            <Text
+                                                text="{oModelFireService>/NonResidential}"
+                                                class="myCustomMargin"
+                                            />
+                                            <Label
+                                                text="Describe the fireFighting and/or resources measures that will be put in place during the proposed open burn"
+                                                class="myCustomMargin"
+                                            />
+                                            <Text
+                                                text="{oModelFireService>/SafeMaterial}"
+                                                class="myCustomMargin"
+                                            />
+                                            <core:Title text="" />
+                                            <Label
+                                                text="Is the area adjacent to the proposed combustible material free of material which is likely to spread the fire?"
+                                            />
+                                            <Text
+                                                text="{oModelFireService>/CombustableMaterail}"
+                                            />
+                                            <Label
+                                                text="For stack/fuel reduction burning, are stacks of such a size that should a sudden wind arise the fire can be easily doused using equipment on site?"
+                                                class="myCustomMargin"
+                                            />
+                                            <Text
+                                                text="{oModelFireService>/SafeStack}"
+                                                class="myCustomMargin"
+                                            />
+                                            <Label text="" />
+                                            <FlexBox
+                                                alignItems="Start"
+                                                justifyContent="Start"
+                                                id="flexBurnFireService"
+                                            >
+                                                <Button
+                                                    text="Save"
+                                                    press=".onSaveFireService"
+                                                    icon="sap-icon://save"
+                                                    type="Emphasized"
+                                                    width="100px"
+                                                    class="sapUiSmallMarginEnd"
+                                                />
+                                                <Button
+                                                    text="Edit"
+                                                    press=".onEditFireService"
+                                                    icon="sap-icon://edit"
+                                                    type="Emphasized"
+                                                    width="100px"
+                                                    class="sapUiSmallMarginEnd"
+                                                />
+                                            </FlexBox>
+                                        </form:content>
+                                    </form:SimpleForm>
+                                    <form:SimpleForm
+                                        id="frmFireServiceEdit"
+                                        title="Fire Service"
+                                        editable="false"
+                                        layout="ResponsiveGridLayout"
+                                        labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="12"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="1"
+                                        columnsL="1"
+                                        columnsM="1"
+                                        singleContainerFullSize="false"
+                                        visible="{= ${oModelFireService>/isEditing}}"
+                                    >
+                                        <form:content>
+                                            <Label
+                                                text="Specify the water source to be utilised for firefighting"
+                                                labelFor="rdoWaterSourceReview"
+                                            />
+                                            <RadioButtonGroup
+                                                id="rdoWaterSourceReview"
+                                                columns="1"
+                                                class="sapUiMediumMarginBottom"
+                                                select="onWaterSourceReview"
+                                            >
+                                                <RadioButton
+                                                    id="rdoPortableReview"
+                                                    text="Potable"
+                                                />
+                                                <RadioButton
+                                                    id="rdoNonPotableReview"
+                                                    text="Non-potable"
+                                                />
+                                                <RadioButton
+                                                    id="rdoTreatedEffluentReview"
+                                                    text="Treated effluent"
+                                                />
+                                                <RadioButton
+                                                    id="rdoOtherReview"
+                                                    text="Other"
+                                                />
+                                            </RadioButtonGroup>
+                                            <Label text="Other" />
+                                            <TextArea
+                                                width="100%"
+                                                id="TextAreaWaterSourceEdit"
+                                                value="{oModelFireService>/Other}"
+                                                placeholder="Enter text"
+                                                change="handleChange"
+                                                rows="4"
+                                                ariaLabelledBy="TextAreaLabel"
+                                                visible="false"
+                                            />
+                                            <Label
+                                                text="Is the land on which the proposed burning of combustible material will take place, state land, a farm, small holding or land within a proclaimed township not used for residential purposes?."
+                                            />
+                                            <RadioButtonGroup
+                                                id="GrpProposedBurning"
+                                            >
+                                                <RadioButton
+                                                    text="Yes"
+                                                    selected="true"
+                                                />
+                                                <RadioButton text="No" />
+                                            </RadioButtonGroup>
+                                            <Label
+                                                text="Describe the firefighting and / or resources measures that will be put in place during the proposed open burn"
+                                            />
+                                            <TextArea
+                                                width="100%"
+                                                id="TextAFireFighting"
+                                                value="{oModelFireService>/SafeMaterial}"
+                                                placeholder="Enter text"
+                                                change="handleChange"
+                                                rows="4"
+                                                ariaLabelledBy="TextAreaLabel"
+                                            />
+                                            <core:Title text="" />
+                                            <Label
+                                                text="Is the area adjacent to the proposed combustible material free of material which is likely to spread the fire?"
+                                            />
+                                            <RadioButtonGroup id="GrpProposed">
+                                                <RadioButton text="Yes" />
+                                                <RadioButton text="No" />
+                                            </RadioButtonGroup>
+                                            <Label
+                                                text="For stack / fuel reduction burning, are stacks of such a size that should a sudden wind arise the fire can be easily doused using equipment on site?"
+                                            />
+                                            <RadioButtonGroup id="GrpStack">
+                                                <RadioButton text="Yes" />
+                                                <RadioButton text="No" />
+                                            </RadioButtonGroup>
+                                            <Label text="" />
+                                            <FlexBox
+                                                alignItems="Start"
+                                                justifyContent="Start"
+                                                id="flexBurnFireServiceEdit"
+                                            >
+                                                <Button
+                                                    text="Save"
+                                                    press=".onSaveFireService"
+                                                    icon="sap-icon://save"
+                                                    type="Emphasized"
+                                                    width="100px"
+                                                    class="sapUiSmallMarginEnd"
+                                                />
+                                                <Button
+                                                    text="Edit"
+                                                    press=".onEditFireService"
+                                                    icon="sap-icon://edit"
+                                                    type="Emphasized"
+                                                    width="100px"
+                                                    class="sapUiSmallMarginEnd"
+                                                />
+                                            </FlexBox>
+                                        </form:content>
+                                    </form:SimpleForm>
+                                    <form:SimpleForm
+                                        id="frmAppAttachmentsReview"
+                                        title="Attachments"
+                                        editable="false"
+                                        layout="ResponsiveGridLayout"
+                                        labelSpanXL="4"
+                                        labelSpanL="4"
+                                        labelSpanM="12"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                        emptySpanXL="0"
+                                        emptySpanL="0"
+                                        emptySpanM="0"
+                                        emptySpanS="0"
+                                        columnsXL="1"
+                                        columnsL="1"
+                                        columnsM="1"
+                                        singleContainerFullSize="false"
+                                    >
+                                        <form:content>
+                                            <!--<core:Title text=""/>-->
+                                            <Table
+                                                showNoData="true"
+                                                id="TableReview"
+                                                items="{pdfModel>/pdfData}"
+                                            >
+                                                <columns>
+                                                    <Column>
+                                                        <Text
+                                                            text="Document ID"
+                                                            class="myHeading"
+                                                        />
+                                                    </Column>
+                                                    <Column>
+                                                        <Text
+                                                            text="Document Name"
+                                                            class="myHeading"
+                                                        />
+                                                    </Column>
+                                                    <Column>
+                                                        <Text
+                                                            text="Document Size"
+                                                            class="myHeading"
+                                                        />
+                                                    </Column>
+                                                    <Column>
+                                                        <Text
+                                                            text="Upload Date"
+                                                            class="myHeading"
+                                                        />
+                                                    </Column>
+                                                    <Column>
+                                                        <Text
+                                                            text="Document Type"
+                                                            class="myHeading"
+                                                        />
+                                                    </Column>
+                                                </columns>
+                                                <items>
+                                                    <ColumnListItem>
+                                                        <cells>
+                                                            <Text
+                                                                text="{pdfModel>id}"
+                                                            />
+                                                            <Text
+                                                                text="{pdfModel>name}"
+                                                            />
+                                                            <Text
+                                                                text="{pdfModel>size}"
+                                                            />
+                                                            <Text
+                                                                text="{pdfModel>date}"
+                                                            />
+                                                            <Text
+                                                                text="{pdfModel>docName}"
+                                                            />
+                                                        </cells>
+                                                    </ColumnListItem>
+                                                </items>
+                                            </Table>
+                                        </form:content>
+                                    </form:SimpleForm>
+                                </VBox>
+                            </WizardStep>
+                        </Wizard>
+                    </f:content>
+                    <f:footer>
+                        <OverflowToolbar>
+                            <ToolbarSpacer />
+                            <Button
+                                text="Cancel"
+                                press=".onCancel"
+                                type="Emphasized"
+                                width="150px"
+                            />
+                            <Button
+                                text="Save Draft"
+                                press=".onSaveDraft"
+                                type="Emphasized"
+                                width="150px"
+                            />
+                            <Button
+                                id="btnBack"
+                                text="Back"
+                                press=".onBack"
+                                type="Emphasized"
+                                width="150px"
+                                visible="false"
+                            />
+                            <Button
+                                id="btnNext"
+                                text="Next"
+                                press=".onNext"
+                                type="Emphasized"
+                                width="150px"
+                            />
+                            <Button
+                                id="btnComplete"
+                                text="Complete"
+                                press=".onDeclaration"
+                                type="Emphasized"
+                                width="150px"
+                                visible="false"
+                            />
+                        </OverflowToolbar>
+                    </f:footer>
+                </f:DynamicPage>
+            </pages>
+        </NavContainer>
+    </App>
+</mvc:View>

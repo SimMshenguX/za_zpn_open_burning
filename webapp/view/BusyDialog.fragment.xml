@@ -1,0 +1,9 @@
+<core:FragmentDefinition  
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<BusyDialog
+		title="asdf"
+		text="Please wait... loading the data from server"
+		showCancelButton="true"
+		close="on137DialogClosed" />
+</core:FragmentDefinition>

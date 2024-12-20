@@ -1,0 +1,116 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:form="sap.ui.layout.form" xmlns:f="sap.f"
+	xmlns:card="sap.f.cards" controllerName="capetown.gov.za_ZPN_OPEN_BURNING.controller.ApplicationDetails"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<App id="app">
+		<NavContainer id="navContainerWizard" class="sapUiContentPadding">
+			<pages>
+				<f:DynamicPage id="dynamicPage" class="sapUiNoContentPadding" showFooter="true">
+					<f:title>
+						<f:DynamicPageTitle >
+							<f:heading >
+								<HBox width="50%" justifyContent="SpaceBetween">
+									<Image src="{imageModel>/path}/logo.png" alt="Logo" width="200px" height="70px"/>
+								</HBox>
+							</f:heading>
+						</f:DynamicPageTitle>
+					</f:title>
+					<f:content>
+						<VBox width="100%">
+							<form:SimpleForm id="frmAppHeader" editable="false" title="{i18n>appDetailAMandantory}" labelSpanXL="4" layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1">
+								<form:content >
+									<!--<FlexBox alignItems="Center" justifyContent="Center">-->
+									<VBox width="100%" justifyContent="Start" alignItems="Start" class="sapUiResponsiveContentPadding">
+										<Text text="{i18n>txtApplicationDetails} "/>
+										 <!-- <Text text=" {i18n>txtDetails}" textAlign="Center"/>  -->
+										<!-- <MessageStrip
+												text="{i18n>txtApplicationDetails}"
+												type="Information"
+												showIcon="true"
+												class="sapUiMediumMarginBottom">
+										</MessageStrip> -->
+										<!-- <Text text=" {i18n>publicParticipant}"/> -->
+										<MessageStrip
+												text="{i18n>publicParticipant}"
+												type="Information"
+												showIcon="true"
+												class="sapUiMediumMarginBottom">
+										</MessageStrip>
+
+										<MessageStrip
+												text="{i18n>statementObject}"
+												type="Information"
+												showIcon="true"
+												class="sapUiMediumMarginBottom">
+										</MessageStrip>
+										
+										<!-- <Text text=" {i18n>statementObject}"/> -->
+										<!-- <Text text=" {i18n>memberProof}"/> -->
+										<MessageStrip
+												text="{i18n>memberProof}"
+												type="Information"
+												showIcon="true"
+												class="sapUiMediumMarginBottom">
+										</MessageStrip>
+										<!-- <Text text=" {i18n>exemptionProof}"/> -->
+										<MessageStrip
+												text="{i18n>exemptionProof}"
+												type="Information"
+												showIcon="true"
+												class="sapUiMediumMarginBottom">
+										</MessageStrip>
+										<!-- <Text text="{i18n>thirdParty} "/> -->
+										<MessageStrip
+												text="{i18n>thirdParty}"
+												type="Information"
+												showIcon="true"
+												class="sapUiMediumMarginBottom">
+										</MessageStrip>
+									</VBox>
+									<!--</FlexBox>-->
+								</form:content>
+							</form:SimpleForm>
+							<form:SimpleForm id="frmApplicantDetailView" title="{i18n>title}" editable="false" layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="true" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+								columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false">
+								<form:content>
+									<core:Title text=""/>
+									<!-- <FlexBox direction="Column"> -->
+										<Label text="Type of burn" class="myCustomMargin"/>
+										<ComboBox id="cboATypeBurn" placeholder="Select" change="onBurnType" width="100%"
+											items="{ path: 'oBurnTypeModel>/searchBurnType', sorter: { path: 'id' } }">
+											<core:Item key="{oBurnTypeModel>id}" text="{oBurnTypeModel>text}"/>
+										</ComboBox>
+										<Label
+											text="Are you a registered member of the Cape Peninsula Fire Protection Association in terms of the National Veld and Forest Fire Act?"
+											class="myCustomMargin"/>
+										<RadioButtonGroup id="RegMember1" select="onRadioButtonSelect" selectedIndex="0"  width="100%">
+											<RadioButton text="Yes"/>
+											<RadioButton text="No"/>
+											<RadioButton text="Members of another organisation exempt from fees for burning"/>
+										</RadioButtonGroup>
+									<!-- </FlexBox> -->
+									<core:Title text=""/>
+									<!-- <FlexBox direction="Column"> -->
+										<Label text="Burn area description" class="myCustomMargin"/>
+										<ComboBox id="cboBurnArea" placeholder="Select" change="onChangBurnArea"  width="100%"
+											items="{ path: 'oBurningAreaModel>/searchBurn', sorter: { path: 'oBurningAreaModel>searchBurn' } }">
+											<core:Item key="{oBurningAreaModel>id}" text="{oBurningAreaModel>text}"/>
+										</ComboBox>
+									<!-- </FlexBox> -->
+									<Label text=""/>
+									
+								</form:content>
+							</form:SimpleForm>
+						</VBox>
+					</f:content>
+					<f:footer>
+						<OverflowToolbar>
+							<ToolbarSpacer/>
+							<Button text="Back" press=".onBackApp" width="150px" type="Emphasized"/>
+							<Button id="btnBegin" text="Begin" press=".onBegin" width="150px" type="Emphasized"/>
+						</OverflowToolbar>
+					</f:footer>
+				</f:DynamicPage>
+			</pages>
+		</NavContainer>
+	</App>
+</mvc:View>

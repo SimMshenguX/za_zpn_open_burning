@@ -1,0 +1,82 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.f" xmlns:u="sap.ui.unified"
+	xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:card="sap.f.cards"
+	controllerName="capetown.gov.za_ZPN_OPEN_BURNING.controller.declaration" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App id="app">
+		<NavContainer id="navContainerWizard" class="sapUiContentPadding">
+			<pages>
+				<f:DynamicPage id="dynamicPage" class="sapUiNoContentPadding" showFooter="true" fitContent="true">
+					<f:title>
+						<f:DynamicPageTitle>
+							<f:content>
+								<Image src="{imageModel>/path}/logo.png" alt="Logo" width="200px" height="70px"/>
+							</f:content>
+						</f:DynamicPageTitle>
+					</f:title>
+					<f:content>
+						<ScrollContainer>
+							<VBox class="customForm" alignItems="Center" width="100%">
+								<Title text="Opening Burning Application Declaration" class="customTitle" textAlign="Center"/>
+							</VBox>
+							<form:SimpleForm id="frmAppDeclaration" editable="false" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12"
+								labelSpanS="12" adjustLabelSpan="true" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+								singleContainerFullSize="false">
+								<form:content>
+									<l:VerticalLayout >
+										<FlexBox direction="Column">
+										
+											<Text width="60%"
+												text="{i18n>declaireOwner}"
+												class="myCustomMargin"/>
+											<Label text=""/>
+											<Text width="60%" text="{i18n>declaireInformation}"
+												class="myCustomMargin"/>
+											<Label text=""/>
+											<Text width="60%"
+												text="{i18n>declaireAuthorized} "/>
+											<Label text=""/>
+											<Text width="60%"
+												text="{i18n>declaireLodging} "/>
+											<Label text=""/>
+											<Text width="60%"
+												text="{i18n>decalireAgent}"/>
+											<Label text=""/>
+											<Text width="60%"
+												text="{i18n>declaireEmail}"/>
+										
+										</FlexBox>
+									</l:VerticalLayout>
+								</form:content>
+							</form:SimpleForm>
+							<form:SimpleForm id="frmAppDeclarationButtons" editable="false" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12"
+								labelSpanS="12" adjustLabelSpan="true" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2"
+								singleContainerFullSize="false">
+								<form:content>
+									<core:Title text=""/>
+									<FlexBox direction="Column">
+										<DatePicker width="40%" dateValue="{Date>/doa}" id="datePicker" enabled="false"/>
+									</FlexBox>
+									<core:Title text=""/>
+									<FlexBox direction="Column" alignItems="Start" width="60%">
+										<CheckBox text="{i18n>declaireTick}"  select="onConfirmDeclaration" />
+									</FlexBox>
+								
+								</form:content>
+							</form:SimpleForm>
+						</ScrollContainer>
+					</f:content>
+					<f:footer>
+						<OverflowToolbar>
+							<!--<Button icon="sap-icon://message-popup" text="{messagesLength}" type="Emphasized" press="onMessageButtonPress"-->
+							<!--	visible="{= !!$messagesLength}}"/>-->
+							<ToolbarSpacer/>
+							<Button text="Cancel" press=".onCancel" type="Emphasized" width="100px" />
+							<Button text="Save Draft" press=".onSaveDraft" type="Emphasized" width="100px" />
+							<Button id="btnPrevious" text="Previous" press=".onPrevious" type="Emphasized" width="100px" />
+							<Button id="btnSubmit" text="Submit" press=".onSubmit" type="Emphasized" width="100px"  enabled="false" />
+						</OverflowToolbar>
+					</f:footer>
+				</f:DynamicPage>
+			</pages>
+		</NavContainer>
+	</App>
+</mvc:View>

@@ -1,0 +1,109 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZEHM_BURNING_SRV" xml:lang="en" sap:schema-version="1">
+            <EntityType Name="Applicant" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CaseGuid"/>
+                </Key>
+                <Property Name="CaseGuid" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Case Key"/>
+                <Property Name="Fullname" Type="Edm.String" MaxLength="80" sap:unicode="false" sap:label="Complete name"/>
+                <Property Name="CellNumber" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="CellNumber"/>
+                <Property Name="TelephoneNumber" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="Telephone"/>
+                <Property Name="Partner" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Partner"/>
+                <Property Name="Email" Type="Edm.String" MaxLength="241" sap:unicode="false" sap:label="E-Mail Address"/>
+                <Property Name="Address" Type="Edm.String" sap:unicode="false" sap:label="Address"/>
+                <Property Name="Premise" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Premise"/>
+            </EntityType>
+            <EntityType Name="Address" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Plno"/>
+                </Key>
+                <Property Name="City1" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="City" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PostCode1" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Postal Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Street" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Street" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HouseNum1" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="House Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Plno" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Parcel Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZzerfNr" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="ERF / Farm No." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="CaseHeader" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CaseGuid"/>
+                </Key>
+                <Property Name="CaseGuid" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Case Key"/>
+                <Property Name="CaseId" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="Case ID"/>
+                <Property Name="CaseType" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Case Type"/>
+                <Property Name="ApplicationType" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="Application Type"/>
+                <Property Name="EquipmentType" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="Equipment Type"/>
+                <Property Name="FuelType" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="Fuel Type"/>
+                <Property Name="CPFPA_MEMBER" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="CPFPA Member"/>
+                <Property Name="BURN_AREA_DESCRIPTION" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="Burn Area Description"/>
+            </EntityType>
+            <EntityType Name="Documents" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Class"/>
+                    <PropertyRef Name="Docid"/>
+                </Key>
+                <Property Name="CaseGuid" Type="Edm.Guid" sap:unicode="false" sap:label="Case Key" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Class" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="DocuClass" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Docid" Type="Edm.String" Nullable="false" MaxLength="32" sap:unicode="false" sap:label="Object ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Filename" Type="Edm.String" MaxLength="128" sap:unicode="false" sap:label="Filename" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Filetype" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="File Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Doctype" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Document Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Anchor" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Anchor" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="128" sap:unicode="false" sap:label="Document Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FolderDescription" Type="Edm.String" MaxLength="128" sap:unicode="false" sap:label="Document Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SpsId" Type="Edm.String" MaxLength="32" sap:unicode="false" sap:label="Document SPS ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DocumentContent" Type="Edm.String" sap:unicode="false" sap:label="Document Content" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="CaseProperty" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="SearchBy"/>
+                </Key>
+                <Property Name="SearchBy" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Serch By" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Plno" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Parcel Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZzerfNr" Type="Edm.String" MaxLength="8" sap:unicode="false" sap:label="ERF Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Lochier" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="Allotment" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zdistrict" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="DAMS District" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="City1" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="Suburb" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Xaddress" Type="Edm.String" MaxLength="100" sap:unicode="false" sap:label="Address" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ZzfarmName" Type="Edm.String" MaxLength="50" sap:unicode="false" sap:label="Property Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zoning" Type="Edm.String" MaxLength="80" sap:unicode="false" sap:label="Zoning" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Zsuburb" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="Suburb" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Wardname" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="Ward" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SubCouncil" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="Sub-Council" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CaseGuid" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Case Key"/>
+            </EntityType>
+            <EntityType Name="BurningDetails" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CaseGuid"/>
+                </Key>
+                <Property Name="CaseGuid" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Case Key"/>
+                <Property Name="CaseId" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="Case ID"/>
+                <Property Name="CaseType" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Case Type"/>
+                <Property Name="BurnType" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Burn Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FullBurnDescr" Type="Edm.String" Nullable="false" MaxLength="256" sap:unicode="false" sap:label="Full Burn Descr" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AltInvestigationDis" Type="Edm.String" Nullable="false" MaxLength="256" sap:unicode="false" sap:label="Alt Investigation Dis" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Origination" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Origination" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FarEnough" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Far Enough" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AltInvestigationRec" Type="Edm.String" Nullable="false" MaxLength="256" sap:unicode="false" sap:label="Alt Investigation Rec" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PotentialHazard" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Potential Hazard" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityContainer Name="ZEHM_BURNING_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="ApplicantSet" EntityType="ZEHM_BURNING_SRV.Applicant" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="AddressSet" EntityType="ZEHM_BURNING_SRV.Address" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="CaseHeaderSet" EntityType="ZEHM_BURNING_SRV.CaseHeader" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="DocumentsSet" EntityType="ZEHM_BURNING_SRV.Documents" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="CasePropertySet" EntityType="ZEHM_BURNING_SRV.CaseProperty" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="BurningDetailsSet" EntityType="ZEHM_BURNING_SRV.BurningDetails" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <atom:link
+                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZEHM_BURNING_SRV/$metadata"/>
+                <atom:link
+                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZEHM_BURNING_SRV/$metadata"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>

@@ -1,0 +1,109 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.f" xmlns:u="sap.ui.unified"
+	xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core" controllerName="capetown.gov.za_ZPN_OPEN_BURNING.controller.Main"
+	xmlns:html="http://www.w3.org/1999/xhtml" displayBlock="true" height="100%">
+	<App id="app">
+		<NavContainer id="navContainer" >
+			<pages>
+				<f:DynamicPage id="dynamicPage" class="sapUiContentPadding"  >
+					<!-- DynamicPage Title -->
+					<f:title>
+						<f:DynamicPageTitle>
+							<!--<f:content>-->
+								<!--<Image src="{logo.png}" alt="Logo" width="42px" height="42px"/>-->
+								<Image src="{imageModel>/path}/logo.png" alt="Logo" width="200px" height="70px" />
+							<!--</f:content>-->
+							<f:heading>
+								<!--	<Title id="txtTitle1" text="{i18n>title}"/>-->
+							</f:heading>
+						</f:DynamicPageTitle>
+					</f:title>
+					<!-- DynamicPage Header -->
+					<!-- Other content of your page goes here -->
+					<f:content >
+							
+						<VBox class="customForm" alignItems="Center" width="100%">
+						
+							<VBox width="70%" class="sapUiLargeMarginTop" justifyContent="Center" alignItems="Center">
+								<Title text="Air Quality Management Open Burning Application" class="customHeading customTitle" textAlign="Center"/>
+								<Text
+									text="Application to conduct open burning in terms of Sub-section 19(1) read with Schedule 2 of the AIR QUALITY MANAGEMENT(AQM) BY-LAW. 2016, as amended; and to burn combustible material (excluding waste material) in terms of Sub-section 35(4) of the By-law relating to Community Fire Safety."
+									textAlign="Center" class="myCustomMargin"/>
+							</VBox>
+							<VBox width="70%" class="myCustomMargin">
+								<Text
+									text="NOTE: Where a third party wishes to conduct open burning on behalf of the owner of a property, written permission must be obtained from the owner by the third party prior to the making of the application to the City for authorization to conduct open burning. The proof of this written permission must be uploaded with this application."
+									textAlign="Center" class="customText"/>
+							</VBox>
+							<Label text=""/>
+							<!--<VBox class="customForm">-->
+							<form:SimpleForm id="frmAppDetail" editable="false" layout="ResponsiveGridLayout" title="{i18n>txtTitle2}" labelSpanXL="4" labelSpanL="4"
+								labelSpanM="12" labelSpanS="12" adjustLabelSpan="true" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2"
+								columnsL="2" columnsM="2" singleContainerFullSize="true">
+								<!--<Form class="customForm">-->
+								<!--<l:VerticalLayout width="100%" horizontalAlign="Center"></l:VerticalLayout>-->
+								<form:content>
+									<l:VerticalLayout horizontalAlign="Center">
+										<Label text="Please select applicant"/>
+										<RadioButtonGroup id="GroupA"
+											layoutData="{layoutData: new sap.ui.layout.ResponsiveFlowLayoutData({linebreak: true, margin: false, minWidth: 150})}">
+											<RadioButton text="Owner" selected="true"/>
+											<RadioButton text="Proxy of owner"/>
+										</RadioButtonGroup>
+										<Label text="Please select payer" labelFor="GroupB"/>
+										<RadioButtonGroup id="GroupB"
+											layoutData="{layoutData: new sap.ui.layout.ResponsiveFlowLayoutData({linebreak: true, margin: false, minWidth: 150})}">
+											<RadioButton text="Owner" selected="true"/>
+											<RadioButton text="Proxy of owner"/>
+										</RadioButtonGroup>
+										<Label
+											text="Are you a registered member of the Cape Peninsula Fire Protection Association in terms of the National Veld and Forest Fire Act?"
+											labelFor="GroupC"/>
+										<RadioButtonGroup id="GroupC"
+											layoutData="{layoutData: new sap.ui.layout.ResponsiveFlowLayoutData({linebreak: true, margin: false, minWidth: 150})}"
+											select="onRadioButtonSelect">
+											<RadioButton text="Yes" selected="true"/>
+											<RadioButton text="No"/>
+										</RadioButtonGroup>
+										<Text text="Please note that the payment of a processing tariff will be required for your application." id="tarrifLabel" visible="false" class="myCustomMargin customText"/>
+										<VBox>
+											<RadioButton text="A processing fee is not applicable to the following organizations" id="feeNotApplicable"
+												select="onFeeNotApplicableSelect"/>
+											<!--<Label text="Please note that the payment of a processing tariff will be required for your application" id="tarrifLabel" visible="false"-->
+											<!--	layoutData="{layoutData: new sap.ui.layout.ResponsiveFlowLayoutData({linebreak: true, margin: false, minWidth: 150})}"/>-->
+											<Text text="Please note proof of membership will be required as an attachment in Document Uploads step 5 " id="proofLabel"  class="myCustomMargin customText"/>
+											<!--<u:FileUploader buttonText="{i18n>Browse File}" id="fileUploader" name="myFileUpload" multiple="true" change="onFileUploadChange"-->
+											<!--	layoutData="{layoutData: new sap.ui.layout.ResponsiveFlowLayoutData({linebreak: true, margin: false, minWidth: 150})}"></u:FileUploader>-->
+										</VBox>
+										<Label text="Select which organization" id="orgLabel" visible="false"  
+											layoutData="{layoutData: new sap.ui.layout.ResponsiveFlowLayoutData({linebreak: true, margin: false, minWidth: 150})}"/>
+										<Select items="" id="orgItems" visible="false" required="true" class="myCustomMargin"
+											layoutData="{layoutData: new sap.ui.layout.ResponsiveFlowLayoutData({linebreak: true, margin: false, minWidth: 150})}">
+											<core:Item key="1" text="Western Cape Nature Conservation Board"/>
+											<core:Item key="2" text="South Africa National Parks"/>
+											<core:Item key="3" text="Table Mountain National Parks"/>
+											<core:Item key="4" text="City Parks/Biodiversity Management"/>
+											<core:Item key="5" text="Department Public Works"/>
+											<core:Item key="6" text="Kirstenbosch Botanical Institute"/>
+											<core:Item key="7" text="South African Navy"/>
+										</Select>
+										<Label text="Select your application" class="myCustomMargin"
+											layoutData="{layoutData: new sap.ui.layout.ResponsiveFlowLayoutData({linebreak: true, margin: false, minWidth: 150})}"/>
+										<Select items="values"
+											layoutData="{layoutData: new sap.ui.layout.ResponsiveFlowLayoutData({linebreak: true, margin: false, minWidth: 150})}">
+											<core:Item key="1" text="AQM Open burning application"/>
+										</Select>
+										<Label layoutData="{layoutData: new sap.ui.layout.ResponsiveFlowLayoutData({linebreak: true, margin: false, minWidth: 150})}"/>
+										<Button text="View AQM FORM" press="onViewAQM" type="Emphasized" width="200px" 
+											layoutData="{layoutData: new sap.ui.layout.ResponsiveFlowLayoutData({linebreak: true, margin: false, minWidth: 150})}"/>
+									</l:VerticalLayout>
+								</form:content>
+							</form:SimpleForm>
+							<!--</VBox>-->
+							<!--</Form>-->
+						</VBox>
+					</f:content>
+				</f:DynamicPage>
+			</pages>
+		</NavContainer>
+	</App>
+</mvc:View>

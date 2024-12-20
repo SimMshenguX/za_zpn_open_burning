@@ -1,0 +1,144 @@
+/* Enter your custom styles here */
+.myCustomMargin {
+    margin-top: 10px;
+}
+
+.myCustomBold {
+    margin-top: 18px;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.customCheckBoxLabel {
+    white-space: normal;
+    width: 200px;
+
+}
+
+.blackText {
+    color: black; /* Set the text color to black */
+}
+
+.customTextColor {
+    color: blue;
+    /* Replace 'red' with the desired color */
+}
+
+.customHeading {
+    color: blue;
+}
+.myCustomHeader {
+    font-weight: 900;
+    font-size: 24px;
+}
+
+.customFontSize {
+    font-size: 17px;
+}
+
+.customText {
+    color: red;
+}
+
+.twoColumnsText {
+    grid-column: span 2;
+    /* This makes the text span two columns */
+    text-align: center;
+    /* This centers the text horizontally */
+}
+
+.myHeading {
+	 font-weight: bold;
+    font-family: "Century Gothic", sans-serif;
+   
+   
+}
+.boldText {
+	  font-weight: bold;
+}
+
+/* Center align the form content */
+.customForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* Center align the page content */
+.customPageContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.customTitle {
+    font-size: 30px;
+}
+
+/* styles.css */
+.myPlaceholder {
+    font-size: 16px;
+    font-weight: normal;
+    color: #8D9297;
+}
+
+.mandatoryLabel::after {
+    content: "*";
+    color: red; /* Change color to red */
+    margin-left: 3px; /* Adjust margin as needed */
+}
+
+/* Primary Button Style */
+.primaryButton {
+    background-color: #2EA9D3;
+    color: white;
+    /* You can set the text color to your preference */
+    border: none;
+    padding: 10px 20px;
+    /* Adjust padding as needed */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    /* Adjust font size as needed */
+    margin: 4px 2px;
+    cursor: pointer;
+    /*-webkit-box-shadow: 3px 2px 4px 0px rgba(0, 0, 0, 0.15);*/
+    /*-moz-box-shadow: 3px 2px 4px 0px rgba(0, 0, 0, 0.15);*/
+    /*box-shadow: 3px 2px 4px 0px rgba(0, 0, 0, 0.15);*/
+    width: 90%;
+    /* Full-length button width in percentage */
+    max-width: 324pt;
+
+    /* Full-length button width in points 
+}
+
+/* Secondary Button Style */
+.secondaryButton {
+        background-color: #3DB39E;
+        color: white;
+        /* You can set the text color to your preference */
+        border: none;
+        padding: 10px 20px;
+        /* Adjust padding as needed */
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        /* Adjust font size as needed */
+        margin: 4px 2px;
+        cursor: pointer;
+        -webkit-box-shadow: 3px 2px 4px 0px rgba(0, 0, 0, 0.26);
+        -moz-box-shadow: 3px 2px 4px 0px rgba(0, 0, 0, 0.26);
+        box-shadow: 3px 2px 4px 0px rgba(0, 0, 0, 0.26);
+        width: 43%;
+        /* Half-column button width in percentage */
+        max-width: 154pt;
+        /* Half-column button width in points */
+    }
+    
+    
+    
+    /* Section and list styling */
